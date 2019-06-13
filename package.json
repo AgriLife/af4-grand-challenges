@@ -1,0 +1,30 @@
+{
+  "name": "af4-grand-challenges",
+  "version": "0.1.0",
+  "description": "Grand Challenges faculty search form for AgriFlex4",
+  "main": "af4-grand-challenges.php",
+  "scripts": {
+    "start": "git config core.hooksPath hooks && chmod u+x ./hooks/pre-commit && composer install && npm install",
+    "checkwp": "npm run configphpcs && npm run checkphp",
+    "configphpcs": "vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
+    "checkphp": "vendor/bin/phpcs --standard=WordPress --report=source ./*.php ./src ./templates && vendor/bin/phpcs --standard=WordPress ./*.php ./src ./templates"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AgriLife/af4-grand-challenges.git"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "agrilife"
+  ],
+  "author": "Zachary Watkins",
+  "license": "GPL-2.0+",
+  "bugs": {
+    "url": "https://github.com/AgriLife/af4-grand-challenges/issues"
+  },
+  "homepage": "https://github.com/AgriLife/af4-grand-challenges#readme"
+}
