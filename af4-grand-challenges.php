@@ -2,13 +2,13 @@
 /**
  * Grand Challenges for the College of Agriculture and Life Sciences
  *
- * @package      Grand Challenges
+ * @package      af4-grand-challenges
  * @author       Zachary Watkins
  * @copyright    2019 Texas A&M AgriLife Communications
  * @license      GPL-2.0+
  *
  * @wordpress-plugin
- * Plugin Name:  Grand Challenges
+ * Plugin Name:  AgriLife Grand Challenges - AgriFlex4
  * Plugin URI:   https://github.com/AgriLife/af4-grand-challenges
  * Description:  Grand Challenges faculty search form for AgriFlex4.
  * Version:      0.1.0
@@ -60,7 +60,7 @@ function af4_gc_activation() {
 /**
  * The core plugin class that is used to initialize the plugin
  */
-require ALAF4_DIR_PATH . 'src/class-grandchallenges.php';
+require AF4_GC_DIR_PATH . 'src/class-grandchallenges.php';
 
 /* Autoload all classes */
 spl_autoload_register( 'GrandChallenges::autoload' );

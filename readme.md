@@ -13,6 +13,9 @@
 2. Upload the plugin to your site
 
 ## Features
+Shortcodes:
+1. [grand_challenges_people] Shows the whole Grand Challenges faculty specialty search feature.
+2. [grand_challenges_people_search] Shows the faculty search form.
 
 ## Development Installation
 
@@ -27,6 +30,7 @@ When you stage changes to this repository and initiate a commit, they must pass 
 ## Development Tasks
 
 1. Run "npm run checkwp" to check PHP files against WordPress coding standards.
+2. Run "grunt watch" to watch changes to the JavaScript file.
 
 ## Development Requirements
 

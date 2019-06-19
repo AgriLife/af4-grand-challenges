@@ -4,10 +4,10 @@
   "description": "Grand Challenges faculty search form for AgriFlex4",
   "main": "af4-grand-challenges.php",
   "scripts": {
-    "start": "git config core.hooksPath hooks && chmod u+x ./hooks/pre-commit && composer install && npm install",
+    "start": "git config core.hooksPath hooks && chmod u+x ./hooks/pre-commit && composer install && npm install && grunt",
     "checkwp": "npm run configphpcs && npm run checkphp",
     "configphpcs": "vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
-    "checkphp": "vendor/bin/phpcs --standard=WordPress --report=source ./*.php ./src ./templates && vendor/bin/phpcs --standard=WordPress ./*.php ./src ./templates"
+    "checkphp": "vendor/bin/phpcs --standard=WordPress --report=source ./*.php ./src && vendor/bin/phpcs --standard=WordPress ./*.php ./src"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -26,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/AgriLife/af4-grand-challenges/issues"
   },
-  "homepage": "https://github.com/AgriLife/af4-grand-challenges#readme"
+  "homepage": "https://github.com/AgriLife/af4-grand-challenges#readme",
+  "dependencies": {
+    "grunt": "^1.0.4",
+    "grunt-contrib-coffee": "^2.1.0",
+    "grunt-contrib-watch": "^1.1.0"
+  }
 }
