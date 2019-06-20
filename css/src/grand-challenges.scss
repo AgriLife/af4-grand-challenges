@@ -1,0 +1,16 @@
+@import "settings";
+
+.gc-list {
+	h2 {
+		text-align: left;
+		font-size: 1.7rem;
+		width: 100%;
+	}
+
+	.people-listing-item {
+		p,
+		.p {
+			margin-bottom: $paragraph-margin-bottom / 2;
+		}
+	}
+}

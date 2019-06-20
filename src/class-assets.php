@@ -36,6 +36,14 @@ class Assets {
 	 */
 	public static function register_people_assets() {
 
+		wp_register_style(
+			'af4-grand-challenges',
+			AF4_GC_DIR_URL . '/css/grand-challenges.css',
+			array( 'agriflex-default-styles' ),
+			filemtime( AF4_GC_DIR_PATH . '/css/grand-challenges.css' ),
+			'screen'
+		);
+
 		wp_register_script(
 			'gc-search',
 			AF4_GC_DIR_URL . '/js/grand-challenges-search.js',
