@@ -47,7 +47,7 @@ class Ajax {
 	 * @param string $handle Registered script handle.
 	 * @return void
 	 */
-	public static function set_ajax_url( $handle = 'gc-search' ) {
+	public static function set_ajax_url( $handle = 'af4-gc-search' ) {
 
 		$url = array(
 			'ajax' => self::$ajax_url,
