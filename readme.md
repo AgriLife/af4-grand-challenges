@@ -1,4 +1,5 @@
 # Grand Challenges (AgriFlex4)
+[![Codeship Status for AgriLife/af4-grand-challenges](https://app.codeship.com/projects/922e1dd0-75c0-0137-8850-4a74f06c083c/status?branch=master)](https://app.codeship.com/projects/349707)
 
 ## WordPress Requirements
 
