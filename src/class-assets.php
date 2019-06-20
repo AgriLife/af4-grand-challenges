@@ -45,16 +45,16 @@ class Assets {
 		);
 
 		wp_register_script(
-			AF4_GC_DIR_URL . '/js/grand-challenges-search.js',
 			'af4-gc-search',
+			AF4_GC_DIR_URL . 'js/grand-challenges-search.js',
 			array( 'underscore' ),
 			filemtime( AF4_GC_DIR_PATH . 'js/grand-challenges-search.js' ),
 			true
 		);
 
 		wp_register_script(
-			AF4_GC_DIR_URL . '/js/grand-challenges-autocomplete-list.js',
 			'af4-gc-autocomplete-list',
+			AF4_GC_DIR_URL . 'js/grand-challenges-autocomplete-list.js',
 			array( 'jquery-ui-autocomplete' ),
 			filemtime( AF4_GC_DIR_PATH . 'js/grand-challenges-autocomplete-list.js' ),
 			true
