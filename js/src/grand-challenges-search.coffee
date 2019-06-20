@@ -11,7 +11,6 @@ AgriLife.People = class People
 			success: (response) =>
 				response = JSON.parse(response)
 				@people = _.sortBy(response.people, 'lastname')
-				console.log @people
 				@filter(@getTerm())
 		)
 
@@ -44,7 +43,7 @@ do ( $ = jQuery ) ->
 		people = new AgriLife.People
 		people.get()
 
-		$('li.challenge').click (e) ->
+		$('.people-search-form .challenge').click (e) ->
 			people.filter($(this).data('challenge'))
 
 		$('.people-searchform').on 'submit', (e) ->

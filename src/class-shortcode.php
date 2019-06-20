@@ -42,8 +42,9 @@ class Shortcode {
 	public function create_shortcode() {
 
 		\GrandChallenges\Ajax::set_ajax_url();
-		wp_enqueue_script( 'gc-search' );
-		wp_enqueue_script( 'gc-autocomplete-list' );
+		wp_enqueue_style( 'af4-grand-challenges' );
+		wp_enqueue_script( 'af4-gc-search' );
+		wp_enqueue_script( 'af4-gc-autocomplete-list' );
 
 		ob_start(); ?>
 		<div class="gc-list">
@@ -97,29 +98,30 @@ class Shortcode {
 
 				?>
 			</div>
-			<ul id="people-listing-ul" class="grid-x reset"></ul>
+			<ul id="people-listing-ul" class="grid-x grid-margin-x reset"></ul>
 		</div>
 		<script type="text/template" id="people-template">
-			<li class="cell medium-4 small-12 people-listing-item">
-				<div class="grid-x margin-collapse role people-container">
+			<li class="cell medium-4 small-12 people-listing-item p">
+				<div class="grid-x grid-margin-x role people-container">
 					<div class="cell shrink people-image">
 						{{ if ( ! _.isEmpty(picture)) { }}
 							{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}<img src="{{= picture }}" alt="{{= preferredname }} {{= lastname }}" />{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}
+						{{ } else { }}
+							{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}<img src="<?php echo esc_url( AF4_GC_DIR_URL ); ?>img/agrilife-default-people-image-single.png" alt="{{= preferredname }} {{= lastname }}" />{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}
 						{{ } }}
 					</div>
 					<div class="cell auto info">
-						<h2 class="people-name">{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}{{= preferredname }} {{= lastname }}{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}</h2>
-						{{ if ( ! _.isEmpty(title)) { }}<h3>{{= title }}</h3>{{ } }}
-						<p class="people-dept">{{= department }}<br />
-							{{= physicaladdress1 }}<br />
-							{{ if ( 'College Station' !== physicaladdresscity ) { }}{{= physicaladdresscity }}<br />
-							{{= physicaladdressstate }}<br />
-							{{= physicaladdresspostalcode }}<br />
-							{{= unitname }}<br />{{ } }}
-							{{= phonenumber }}</p>
+						<h2 class="people-name p">{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}{{= preferredname }} {{= lastname }}{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}</h2>
+						{{ if ( ! _.isEmpty(title)) { }}<p><strong>{{= title }}</strong></p>{{ } }}
+						<p class="people-dept">{{ if ( ! _.isEmpty(department)) { }}{{= department }}<br />{{ } }}
+							{{ if ( ! _.isEmpty(department)) { }}<em>{{= physicaladdress1 }}</em><br />{{ } }}
+							{{ if ( ! _.isEmpty(physicaladdress2)) { }}<em>{{= physicaladdress2 }}</em><br />{{ } }}
+							{{ if ( 'College Station' !== physicaladdresscity ) { }}<em>{{ if ( ! _.isEmpty(physicaladdresscity) ) { }}{{= physicaladdresscity }}, {{ } }}{{ if ( ! _.isEmpty(physicaladdressstate) ) { }}{{= physicaladdressstate }} {{ } }}{{ if ( ! _.isEmpty(physicaladdresspostalcode) ) { }}{{= physicaladdresspostalcode }}{{ } }}</em><br />{{ } }}
+							{{ if ( ! _.isEmpty(phonenumber)) { }}<a href="tel:{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a>{{ } }}</p>
 						<p class="people-email email"><a href="mailto:{{= emailaddress }}">{{= _.escape(emailaddress) }}</a></p>
 						{{ if (specializations != false) { }}
 							<div class="people-specialty-list expanded">
+								<strong>Specializations</strong>
 								<ul>
 									{{ _.each(specializations, function(sp) { }}
 										<li>{{= sp }}</li>
@@ -155,8 +157,9 @@ class Shortcode {
 			$atts
 		);
 		\GrandChallenges\Ajax::set_ajax_url();
-		wp_enqueue_script( 'gc-search' );
-		wp_enqueue_script( 'gc-autocomplete-list' );
+		wp_enqueue_style( 'af4-grand-challenges' );
+		wp_enqueue_script( 'af4-gc-search' );
+		wp_enqueue_script( 'af4-gc-autocomplete-list' );
 		ob_start();
 		?>
 			<label>
