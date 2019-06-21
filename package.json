@@ -1,8 +1,8 @@
 {
-  "name": "af4-grand-challenges",
+  "name": "agrilife-faculty-search",
   "version": "0.1.0",
-  "description": "Grand Challenges faculty search form for AgriFlex4",
-  "main": "af4-grand-challenges.php",
+  "description": "Faculty search feature using the AgriLife People API",
+  "main": "agrilife-faculty-search.php",
   "scripts": {
     "start": "git config core.hooksPath hooks && chmod u+x ./hooks/pre-commit && composer install && npm install && grunt",
     "checkwp": "npm run configphpcs && npm run checkphp",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AgriLife/af4-grand-challenges.git"
+    "url": "git+https://github.com/AgriLife/agrilife-faculty-search.git"
   },
   "keywords": [
     "wordpress",
@@ -24,9 +24,9 @@
   "author": "Zachary Watkins",
   "license": "GPL-2.0+",
   "bugs": {
-    "url": "https://github.com/AgriLife/af4-grand-challenges/issues"
+    "url": "https://github.com/AgriLife/agrilife-faculty-search/issues"
   },
-  "homepage": "https://github.com/AgriLife/af4-grand-challenges#readme",
+  "homepage": "https://github.com/AgriLife/agrilife-faculty-search#readme",
   "dependencies": {
     "grunt": "^1.0.4",
     "grunt-contrib-coffee": "^2.1.0",

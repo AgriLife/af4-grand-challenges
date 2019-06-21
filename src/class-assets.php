@@ -2,18 +2,18 @@
 /**
  * Assets for the plugin.
  *
- * @link       https://github.com/AgriLife/af4-grand-challenges/blob/master/src/class-assets.php
+ * @link       https://github.com/AgriLife/agrilife-faculty-search/blob/master/src/class-assets.php
  * @since      0.1.0
- * @package    af4-grand-challenges
- * @subpackage af4-grand-challenges/src
+ * @package    agrilife-faculty-search
+ * @subpackage agrilife-faculty-search/src
  */
 
-namespace GrandChallenges;
+namespace FacultySearch;
 
 /**
  * Loads required theme assets
  *
- * @package af4-grand-challenges
+ * @package agrilife-faculty-search
  * @since 0.1.0
  */
 class Assets {
@@ -34,38 +34,30 @@ class Assets {
 	 * @since 0.1.0
 	 * @return void
 	 */
-	public static function register_people_assets() {
+	public static function register_assets() {
 
 		wp_register_style(
-			'af4-grand-challenges',
-			AF4_GC_DIR_URL . '/css/grand-challenges.css',
+			'agrilife-faculty-search',
+			AGFS_DIR_URL . '/css/faculty-search.css',
 			array( 'agriflex-default-styles' ),
-			filemtime( AF4_GC_DIR_PATH . '/css/grand-challenges.css' ),
+			filemtime( AGFS_DIR_PATH . 'css/faculty-search.css' ),
 			'screen'
 		);
 
 		wp_register_script(
-			'af4-gc-search',
-			AF4_GC_DIR_URL . 'js/grand-challenges-search.js',
+			'agrilife-faculty-search',
+			AGFS_DIR_URL . 'js/faculty-search.js',
 			array( 'underscore' ),
-			filemtime( AF4_GC_DIR_PATH . 'js/grand-challenges-search.js' ),
+			filemtime( AGFS_DIR_PATH . 'js/faculty-search.js' ),
 			true
 		);
 
 		wp_register_script(
-			'af4-gc-autocomplete-list',
-			AF4_GC_DIR_URL . 'js/grand-challenges-autocomplete-list.js',
+			'afs-autocomplete-list',
+			AGFS_DIR_URL . 'js/faculty-search-autocomplete-list.js',
 			array( 'jquery-ui-autocomplete' ),
-			filemtime( AF4_GC_DIR_PATH . 'js/grand-challenges-autocomplete-list.js' ),
+			filemtime( AGFS_DIR_PATH . 'js/faculty-search-autocomplete-list.js' ),
 			true
-		);
-
-		wp_enqueue_style(
-			'plugin_name-admin-ui-css',
-			'//ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/smoothness/jquery-ui.css',
-			false,
-			'1.8.21',
-			false
 		);
 
 	}

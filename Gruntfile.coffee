@@ -19,13 +19,13 @@ module.exports = (grunt) ->
 					style: 'compressed'
 					precision: 2
 				files:
-					'css/grand-challenges.css': 'css/src/grand-challenges.scss'
+					'css/faculty-search.css': 'css/src/faculty-search.scss'
 			dev:
 				options:
 					style: 'expanded'
 					precision: 2
 				files:
-					'css/grand-challenges.css': 'css/src/grand-challenges.scss'
+					'css/faculty-search.css': 'css/src/faculty-search.scss'
 		sasslint:
 			options:
 				configFile: '.sass-lint.yml'

@@ -1,5 +1,5 @@
-# Grand Challenges (AgriFlex4)
-[![Codeship Status for AgriLife/af4-grand-challenges](https://app.codeship.com/projects/922e1dd0-75c0-0137-8850-4a74f06c083c/status?branch=master)](https://app.codeship.com/projects/349707)
+# Faculty Search
+[![Codeship Status for AgriLife/agrilife-faculty-search](https://app.codeship.com/projects/922e1dd0-75c0-0137-8850-4a74f06c083c/status?branch=master)](https://app.codeship.com/projects/349707)
 
 ## WordPress Requirements
 
@@ -10,13 +10,13 @@
 
 ## Installation
 
-1. [Download the latest release](https://github.com/agrilife/af4-grand-challenges/releases/latest)
+1. [Download the latest release](https://github.com/agrilife/agrilife-faculty-search/releases/latest)
 2. Upload the plugin to your site
 
 ## Features
 Shortcodes:
-1. [grand_challenges_people] Shows the whole Grand Challenges faculty specialty search feature.
-2. [grand_challenges_people_search] Shows the faculty search form.
+1. [faculty_search_categories] Shows the faculty search form with category buttons.
+2. [faculty_search] Shows the faculty search form.
 
 ## Development Installation
 

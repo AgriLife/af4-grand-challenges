@@ -2,18 +2,18 @@
 /**
  * Request AgriLife People API data as a JSON file.
  *
- * @link       https://github.com/AgriLife/af4-grand-challenges/blob/master/src/class-ajax.php
+ * @link       https://github.com/AgriLife/agrilife-faculty-search/blob/master/src/class-ajax.php
  * @since      0.1.0
- * @package    af4-grand-challenges
- * @subpackage af4-grand-challenges/src
+ * @package    agrilife-faculty-search
+ * @subpackage agrilife-faculty-search/src
  */
 
-namespace GrandChallenges;
+namespace FacultySearch;
 
 /**
  * Generates JSON file via an AJAX call.
  *
- * @package af4-grand-challenges
+ * @package agrilife-faculty-search
  * @since 0.1.0
  */
 class Ajax {
@@ -35,8 +35,8 @@ class Ajax {
 
 		self::$ajax_url = admin_url( 'admin-ajax.php' );
 
-		add_action( 'wp_ajax_get_people', '\GrandChallenges\Ajax::get_people' );
-		add_action( 'wp_ajax_nopriv_get_people', '\GrandChallenges\Ajax::get_people' );
+		add_action( 'wp_ajax_get_people', '\FacultySearch\Ajax::get_people' );
+		add_action( 'wp_ajax_nopriv_get_people', '\FacultySearch\Ajax::get_people' );
 
 	}
 
@@ -47,7 +47,7 @@ class Ajax {
 	 * @param string $handle Registered script handle.
 	 * @return void
 	 */
-	public static function set_ajax_url( $handle = 'af4-gc-search' ) {
+	public static function set_ajax_url( $handle = 'agrilife-faculty-search' ) {
 
 		$url = array(
 			'ajax' => self::$ajax_url,

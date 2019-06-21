@@ -2,18 +2,18 @@
 /**
  * Assets for the plugin.
  *
- * @link       https://github.com/AgriLife/af4-grand-challenges/blob/master/src/class-assets.php
+ * @link       https://github.com/AgriLife/agrilife-faculty-search/blob/master/src/class-assets.php
  * @since      0.1.0
- * @package    af4-grand-challenges
- * @subpackage af4-grand-challenges/src
+ * @package    agrilife-faculty-search
+ * @subpackage agrilife-faculty-search/src
  */
 
-namespace GrandChallenges;
+namespace FacultySearch;
 
 /**
  * Create shortcode to display the faculty search form.
  *
- * @package af4-grand-challenges
+ * @package agrilife-faculty-search
  * @since 0.1.0
  */
 class Shortcode {
@@ -26,25 +26,25 @@ class Shortcode {
 	 */
 	public function __construct() {
 
-		add_shortcode( 'grand_challenges_people', array( $this, 'create_shortcode' ) );
-		add_shortcode( 'grand_challenges_people_search', array( $this, 'create_search' ) );
-		add_action( 'wp_enqueue_scripts', '\GrandChallenges\Assets::register_people_assets' );
-		add_action( 'wp_enqueue_scripts', '\GrandChallenges\Assets::register_autocomplete_assets' );
+		add_shortcode( 'faculty_search_categories', array( $this, 'create_shortcode' ) );
+		add_shortcode( 'faculty_search', array( $this, 'create_search' ) );
+		add_action( 'wp_enqueue_scripts', '\FacultySearch\Assets::register_assets' );
+		add_action( 'wp_enqueue_scripts', '\FacultySearch\Assets::register_autocomplete_assets' );
 
 	}
 
 	/**
-	 * Output for grand_challenges_people shortcode.
+	 * Output for faculty_search_categories shortcode.
 	 *
 	 * @since 0.1.0
 	 * @return string
 	 */
 	public function create_shortcode() {
 
-		\GrandChallenges\Ajax::set_ajax_url();
-		wp_enqueue_style( 'af4-grand-challenges' );
-		wp_enqueue_script( 'af4-gc-search' );
-		wp_enqueue_script( 'af4-gc-autocomplete-list' );
+		\FacultySearch\Ajax::set_ajax_url();
+		wp_enqueue_style( 'agrilife-faculty-search' );
+		wp_enqueue_script( 'agrilife-faculty-search' );
+		wp_enqueue_script( 'afs-autocomplete-list' );
 
 		ob_start(); ?>
 		<div class="gc-list">
@@ -53,15 +53,15 @@ class Shortcode {
 					<h4>Search faculty by specialty</h4>
 				</label>
 				<div class="grid-x p">
-					<div class="cell medium-6 small-12 challenge" data-challenge="food"><a href="#Food" class="button expanded button-radius secondary">Feeding Our World</a></div>
-					<div class="cell medium-6 small-12 challenge" data-challenge="environment"><a href="#Environment" class="button expanded button-radius secondary">Protecting Our Environment</a></div>
+					<div class="cell medium-6 small-12 category" data-category="food"><a href="#Food" class="button expanded button-radius secondary">Feeding Our World</a></div>
+					<div class="cell medium-6 small-12 category" data-category="environment"><a href="#Environment" class="button expanded button-radius secondary">Protecting Our Environment</a></div>
 				</div>
 				<div class="grid-x p">
-					<div class="cell medium-6 small-12 challenge" data-challenge="health"><a href="#Health" class="button expanded button-radius secondary">Improving Our Health</a></div>
-					<div class="cell medium-6 small-12 challenge" data-challenge="youth"><a href="#Youth" class="button expanded button-radius secondary">Enriching Our Youth</a></div>
+					<div class="cell medium-6 small-12 category" data-category="health"><a href="#Health" class="button expanded button-radius secondary">Improving Our Health</a></div>
+					<div class="cell medium-6 small-12 category" data-category="youth"><a href="#Youth" class="button expanded button-radius secondary">Enriching Our Youth</a></div>
 				</div>
 				<div class="grid-x p">
-					<div class="cell medium-6 small-12 challenge" data-challenge="economy"><a href="#Economy" class="button expanded button-radius secondary">Growing Our Economy</a></div>
+					<div class="cell medium-6 small-12 category" data-category="economy"><a href="#Economy" class="button expanded button-radius secondary">Growing Our Economy</a></div>
 				</div>
 				<?php
 
@@ -107,7 +107,7 @@ class Shortcode {
 						{{ if ( ! _.isEmpty(picture)) { }}
 							{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}<img src="{{= picture }}" alt="{{= preferredname }} {{= lastname }}" />{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}
 						{{ } else { }}
-							{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}<img src="<?php echo esc_url( AF4_GC_DIR_URL ); ?>img/agrilife-default-people-image-single.png" alt="{{= preferredname }} {{= lastname }}" />{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}
+							{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}<img src="<?php echo esc_url( AGFS_DIR_URL ); ?>img/agrilife-default-people-image-single.png" alt="{{= preferredname }} {{= lastname }}" />{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}
 						{{ } }}
 					</div>
 					<div class="cell auto info">
@@ -142,7 +142,7 @@ class Shortcode {
 	}
 
 	/**
-	 * Output for grand_challenges_people_search shortcode.
+	 * Output for faculty_search shortcode.
 	 *
 	 * @since 0.1.0
 	 * @param array $atts Shortcode attributes.
@@ -156,14 +156,14 @@ class Shortcode {
 			),
 			$atts
 		);
-		\GrandChallenges\Ajax::set_ajax_url();
-		wp_enqueue_style( 'af4-grand-challenges' );
-		wp_enqueue_script( 'af4-gc-search' );
-		wp_enqueue_script( 'af4-gc-autocomplete-list' );
+		\FacultySearch\Ajax::set_ajax_url();
+		wp_enqueue_style( 'agrilife-faculty-search' );
+		wp_enqueue_script( 'agrilife-faculty-search' );
+		wp_enqueue_script( 'afs-autocomplete-list' );
 		ob_start();
 		?>
 			<label>
-				<h4 class="p">Enter a Grand Challenge keyword to locate associated faculty</h4>
+				<h4 class="p">Enter a Grand category keyword to locate associated faculty</h4>
 			</label>
 			<form role="search" class="people-searchform" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $a['page'] ); ?>">
 				<input type="text" class="s" name="p" id="s" placeholder="Search for a term" /><br />

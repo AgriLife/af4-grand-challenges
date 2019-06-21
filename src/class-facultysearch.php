@@ -5,10 +5,10 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://github.com/AgriLife/af4-grand-challenges/blob/master/src/class-grandchallenges.php
+ * @link       https://github.com/AgriLife/agrilife-faculty-search/blob/master/src/class-FacultySearch.php
  * @since      0.1.0
- * @package    af4-grand-challenges
- * @subpackage af4-grand-challenges/src
+ * @package    agrilife-faculty-search
+ * @subpackage agrilife-faculty-search/src
  */
 
 /**
@@ -17,7 +17,7 @@
  * @since 0.1.0
  * @return void
  */
-class GrandChallenges {
+class FacultySearch {
 
 	/**
 	 * File name
@@ -54,21 +54,21 @@ class GrandChallenges {
 	public function init() {
 
 		// Load required assets.
-		require_once AF4_GC_DIR_PATH . '/src/class-assets.php';
-		$assets = new \GrandChallenges\Assets();
+		require_once AGFS_DIR_PATH . '/src/class-assets.php';
+		$assets = new \FacultySearch\Assets();
 
 		// Load shortcodes.
-		require_once AF4_GC_DIR_PATH . '/src/class-shortcode.php';
-		$shortcode = new \GrandChallenges\Shortcode();
+		require_once AGFS_DIR_PATH . '/src/class-shortcode.php';
+		$shortcode = new \FacultySearch\Shortcode();
 
 		// Load ajax.
-		require_once AF4_GC_DIR_PATH . '/src/class-ajax.php';
-		$ajax = new \GrandChallenges\Ajax();
+		require_once AGFS_DIR_PATH . '/src/class-ajax.php';
+		$ajax = new \FacultySearch\Ajax();
 
 		/* Flush rewrite rules on plugin installation */
-		if ( get_option( 'af4_gc_flush_rewrite_rules_flag' ) ) {
+		if ( get_option( 'agfs_flush_rewrite_rules_flag' ) ) {
 			flush_rewrite_rules();
-			delete_option( 'af4_gc_flush_rewrite_rules_flag' );
+			delete_option( 'agfs_rewrite_rules_flag' );
 		}
 
 	}

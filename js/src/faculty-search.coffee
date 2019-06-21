@@ -43,8 +43,8 @@ do ( $ = jQuery ) ->
 		people = new AgriLife.People
 		people.get()
 
-		$('.people-search-form .challenge').click (e) ->
-			people.filter($(this).data('challenge'))
+		$('.people-search-form .category').click (e) ->
+			people.filter($(this).data('category'))
 
 		$('.people-searchform').on 'submit', (e) ->
 			e.preventDefault()
