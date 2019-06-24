@@ -41,6 +41,10 @@ class FacultySearch {
 	 */
 	private function __construct() {
 
+		// Check dependency.
+		require_once AGFS_DIR_PATH . '/src/class-checkdependency.php';
+		$check = new \FacultySearch\CheckDependency();
+
 		add_action( 'init', array( $this, 'init' ) );
 
 	}
