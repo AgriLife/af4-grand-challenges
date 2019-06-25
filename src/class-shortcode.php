@@ -115,9 +115,9 @@ class Shortcode {
 						{{ if ( ! _.isEmpty(title)) { }}<p><strong>{{= title }}</strong></p>{{ } }}
 						<p class="people-dept">{{ if ( ! _.isEmpty(department)) { }}{{= department }}<br />{{ } }}
 							{{ if ( ! _.isEmpty(physicaladdress1)) { }}<em>{{= physicaladdress1 }}</em><br />{{ } }}
-							{{ if ( 'College Station' !== physicaladdresscity ) { }}{{ if ( ! _.isEmpty(physicaladdress2)) { }}<em>{{= physicaladdress2 }}</em><br />{{ } }}<em>{{ if ( ! _.isEmpty(physicaladdresscity) ) { }}{{= physicaladdresscity }}, {{ } }}{{ if ( ! _.isEmpty(physicaladdressstate) ) { }}{{= physicaladdressstate }} {{ } }}{{ if ( ! _.isEmpty(physicaladdresspostalcode) ) { }}{{= physicaladdresspostalcode.replace(/-\d+$/, '') }}{{ } }}</em><br />{{ } }}</p>
-							<p class="people-email email">{{ if ( ! _.isEmpty(phonenumber)) { }}<a href="tel:{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a>{{ } }}
-						<a href="mailto:{{= emailaddress }}">{{= _.escape(emailaddress) }}</a></p>
+							{{ if ( 'College Station' !== physicaladdresscity ) { }}{{ if ( ! _.isEmpty(physicaladdress2)) { }}<em>{{= physicaladdress2 }}</em><br />{{ } }}<em>{{ if ( ! _.isEmpty(physicaladdresscity) ) { }}{{= physicaladdresscity }}, {{ } }}{{ if ( ! _.isEmpty(physicaladdressstate) ) { }}{{= physicaladdressstate }} {{ } }}{{ if ( ! _.isEmpty(physicaladdresspostalcode) ) { }}{{= physicaladdresspostalcode.replace(/-\d+$/, '') }}{{ } }}</em>{{ } }}</p>
+						<p class="people-email email">{{ if ( ! _.isEmpty(phonenumber)) { }}<a href="tel:{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a><br />{{ } }}
+							<a href="mailto:{{= emailaddress }}">{{= _.escape(emailaddress) }}</a></p>
 					</div>
 				</div>
 			</li>
