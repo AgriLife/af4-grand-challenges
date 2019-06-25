@@ -119,16 +119,6 @@ class Shortcode {
 							{{ if ( 'College Station' !== physicaladdresscity ) { }}<em>{{ if ( ! _.isEmpty(physicaladdresscity) ) { }}{{= physicaladdresscity }}, {{ } }}{{ if ( ! _.isEmpty(physicaladdressstate) ) { }}{{= physicaladdressstate }} {{ } }}{{ if ( ! _.isEmpty(physicaladdresspostalcode) ) { }}{{= physicaladdresspostalcode }}{{ } }}</em><br />{{ } }}
 							{{ if ( ! _.isEmpty(phonenumber)) { }}<a href="tel:{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a>{{ } }}</p>
 						<p class="people-email email"><a href="mailto:{{= emailaddress }}">{{= _.escape(emailaddress) }}</a></p>
-						{{ if (specializations != false) { }}
-							<div class="people-specialty-list expanded">
-								<strong>Specializations</strong>
-								<ul>
-									{{ _.each(specializations, function(sp) { }}
-										<li>{{= sp }}</li>
-									{{ }); }}
-								</ul>
-							</div>
-						{{ } }}
 					</div>
 				</div>
 			</li>
