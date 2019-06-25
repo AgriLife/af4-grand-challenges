@@ -47,16 +47,8 @@ class Assets {
 		wp_register_script(
 			'agrilife-faculty-search',
 			AGFS_DIR_URL . 'js/faculty-search.js',
-			array( 'underscore' ),
+			array( 'underscore', 'jquery-ui-autocomplete' ),
 			filemtime( AGFS_DIR_PATH . 'js/faculty-search.js' ),
-			true
-		);
-
-		wp_register_script(
-			'afs-autocomplete-list',
-			AGFS_DIR_URL . 'js/faculty-search-autocomplete-list.js',
-			array( 'jquery-ui-autocomplete' ),
-			filemtime( AGFS_DIR_PATH . 'js/faculty-search-autocomplete-list.js' ),
 			true
 		);
 

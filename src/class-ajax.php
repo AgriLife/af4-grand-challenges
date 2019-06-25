@@ -68,6 +68,7 @@ class Ajax {
 
 		$cached          = true;
 		$agrilife_people = get_transient( 'agrilife_people_list' );
+		$specializations = get_transient( 'agrilife_people_specializations' );
 
 		if ( false === $agrilife_people ) {
 
@@ -92,8 +93,9 @@ class Ajax {
 
 			if ( 200 === $results['status'] ) {
 
-				$payload       = $results['people'];
-				$parsed_people = array();
+				$payload         = $results['people'];
+				$parsed_people   = array();
+				$specializations = array();
 
 				foreach ( $payload as $p ) {
 
@@ -129,8 +131,17 @@ class Ajax {
 						} else {
 
 							$parsed = array();
+
 							foreach ( $p['specializations'] as $s ) {
+
+								if ( ! in_array( $s, $specializations, true ) ) {
+
+									array_push( $specializations, $s );
+
+								}
+
 								array_push( $parsed, strtolower( $s ) );
+
 							}
 
 							$person->specializations = $parsed;
@@ -147,17 +158,20 @@ class Ajax {
 			} else {
 
 				$agrilife_people = false;
+				$specializations = false;
 
 			}
 
 			// Store data.
 			set_transient( 'agrilife_people_list', $agrilife_people, WEEK_IN_SECONDS );
+			set_transient( 'agrilife_people_specializations', $specializations, WEEK_IN_SECONDS );
 
 		}
 
 		$return = array(
-			'cached' => $cached,
-			'people' => $agrilife_people,
+			'cached'          => $cached,
+			'people'          => $agrilife_people,
+			'specializations' => $specializations,
 		);
 
 		die( wp_json_encode( $return ) );

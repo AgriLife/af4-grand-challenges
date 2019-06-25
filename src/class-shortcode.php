@@ -44,7 +44,6 @@ class Shortcode {
 		\FacultySearch\Ajax::set_ajax_url();
 		wp_enqueue_style( 'agrilife-faculty-search' );
 		wp_enqueue_script( 'agrilife-faculty-search' );
-		wp_enqueue_script( 'afs-autocomplete-list' );
 
 		ob_start(); ?>
 		<div class="gc-list">
@@ -148,7 +147,6 @@ class Shortcode {
 		\FacultySearch\Ajax::set_ajax_url();
 		wp_enqueue_style( 'agrilife-faculty-search' );
 		wp_enqueue_script( 'agrilife-faculty-search' );
-		wp_enqueue_script( 'afs-autocomplete-list' );
 		ob_start();
 		?>
 			<label>
