@@ -3,7 +3,7 @@ module.exports = (grunt) ->
 		pkg : @file.readJSON('package.json')
 		watch:
 			files: ['css/src/*.scss', '**/**.coffee']
-			tasks: ['default']
+			tasks: ['develop']
 		coffee :
 			compile:
 				expand: true
