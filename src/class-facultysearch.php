@@ -45,7 +45,11 @@ class FacultySearch {
 		require_once AGFS_DIR_PATH . '/src/class-checkdependency.php';
 		$check = new \FacultySearch\CheckDependency();
 
-		add_action( 'init', array( $this, 'init' ) );
+		if ( $check->has_all_dependencies() ) {
+
+			add_action( 'init', array( $this, 'init' ) );
+
+		}
 
 	}
 
