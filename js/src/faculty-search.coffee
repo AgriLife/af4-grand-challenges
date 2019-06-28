@@ -3,17 +3,41 @@ AgriLife = {} if not AgriLife
 
 AgriLife.People = class People
 
+	updateSpecs: (data) ->
+		$('#s').autocomplete 'option', 'source', data
+
 	get: ->
 		$.ajax(
 			url: url.ajax
 			data:
 				action: 'get_people'
 			success: (response) =>
-				response = JSON.parse(response)
-				@filter(@getTerm())
-				$('#s').autocomplete source: response.specializations
+				response = JSON.parse response
+				@people = response.people
 				@specializations = response.specializations
+
+				if $('#s').data('ui-autocomplete')
+					@update
+				else
+					@init
+
+				localStorage.setItem 'agrilife-people-faculty', JSON.stringify response.people
+				localStorage.setItem 'agrilife-people-specializations', JSON.stringify response.specializations
 		)
+
+	update: ->
+		@filter @getTerm()
+		$('#s').autocomplete 'option', 'source', @specializations
+
+	init: ->
+		@filter @getTerm()
+		$('#s').autocomplete source: @specializations
+
+	tryInitLocalStorage: ->
+		if localStorage.getItem('agrilife-people-faculty') and localStorage.getItem('agrilife-people-specializations')
+			@people = JSON.parse localStorage.getItem 'agrilife-people-faculty'
+			@specializations = JSON.parse localStorage.getItem 'agrilife-people-specializations'
+			@init()
 
 	filter: (term) ->
 		$('#people-listing-ul').html('')
@@ -42,6 +66,9 @@ do ( $ = jQuery ) ->
 	$ ->
 
 		people = new AgriLife.People
+
+		people.tryInitLocalStorage()
+
 		people.get()
 
 		$('.people-search-form .category').click (e) ->
