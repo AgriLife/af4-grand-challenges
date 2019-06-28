@@ -185,6 +185,8 @@ class Ajax {
 				);
 				$agrilife_people = $parsed_people;
 
+				$specializations = array_keys( $specializations );
+
 			} else {
 
 				$agrilife_people = false;

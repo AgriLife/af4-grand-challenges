@@ -12,6 +12,7 @@ AgriLife.People = class People
 				response = JSON.parse(response)
 				@filter(@getTerm())
 				$('#s').autocomplete source: response.specializations
+				@specializations = response.specializations
 		)
 
 	filter: (term) ->
