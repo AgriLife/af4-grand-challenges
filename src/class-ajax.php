@@ -67,10 +67,10 @@ class Ajax {
 	public function get_people() {
 
 		$cached          = true;
-		$agrilife_people = get_transient( 'agrilife_people_list' );
-		$specializations = get_transient( 'agrilife_people_specializations' );
+		$agrilife_people = get_transient( 'agrilife_faculty_list' );
+		$specializations = get_transient( 'agrilife_faculty_specializations' );
 
-		if ( false === $agrilife_people ) {
+		if ( false === $agrilife_people || false === get_transient( 'agrilife_faculty_specializations' ) ) {
 
 			$cached = false;
 
@@ -195,8 +195,8 @@ class Ajax {
 			}
 
 			// Store data.
-			set_transient( 'agrilife_people_list', $agrilife_people, WEEK_IN_SECONDS );
-			set_transient( 'agrilife_people_specializations', $specializations, WEEK_IN_SECONDS );
+			set_transient( 'agrilife_faculty_list', $agrilife_people, WEEK_IN_SECONDS );
+			set_transient( 'agrilife_faculty_specializations', $specializations, WEEK_IN_SECONDS );
 
 		}
 
