@@ -171,7 +171,7 @@ class Ajax {
 
 						}
 
-						array_push( $parsed_people, $person );
+						$parsed_people[] = $person;
 
 					}
 				}
