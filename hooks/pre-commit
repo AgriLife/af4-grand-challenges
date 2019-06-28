@@ -20,21 +20,21 @@ else
 
 	phplint=`vendor/bin/phpcs --standard=WordPress $phpFilesStr`
 	echo $phpFilesStr;
+	echo "$phplint"
 
 	# Try to fix files automatically with phpcbf
 	if [[ "$phplint" == *"FOUND"* ]]
 		then
+			hasLintErrors="true"
 			vendor/bin/phpcbf --standard=WordPress $phpFilesStr
-			git add $phpFilesStr
-			phplint=`vendor/bin/phpcs --standard=WordPress $phpFilesStr`
+			phpcbf=`vendor/bin/phpcs --standard=WordPress $phpFilesStr`
+			if [[ "$phpcbf" == *"FOUND"* ]]
+				then
+					echo "To fix your syntax issues run: vendor/bin/phpcbf --standard=WordPress $phpFilesStr"
+			fi
 	fi
 
 	echo "$phplint"
-
-	if [[ "$phplint" == *"FOUND"* ]]
-		then
-			hasLintErrors="true"
-	fi
 fi
 
 #
