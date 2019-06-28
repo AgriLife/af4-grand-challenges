@@ -29,7 +29,7 @@ AgriLife.People = class People
 				interpolate : /\{\{=(.+?)\}\}/g
 			compiled = _.template template
 			_.templateSettings = saveSettings
-			output = compiled person
+			output = compiled {person:person}
 			$('#people-listing-ul').append(output)
 		)
 
