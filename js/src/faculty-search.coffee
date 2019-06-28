@@ -35,8 +35,7 @@ AgriLife.People = class People
 
 	getTerm: () ->
 		url = document.URL.split('=')[1]
-		if url? then url.toLowerCase().replace(/%20| /g, ' ') else url
-
+		if url? then url.replace(/%20| /g, ' ') else url
 
 do ( $ = jQuery ) ->
 	"use strict"
@@ -51,5 +50,13 @@ do ( $ = jQuery ) ->
 		$('.people-searchform').on 'submit', (e) ->
 			e.preventDefault()
 			query = $('input[name="p"]').val()
+			# Capitalize all words
+			splitStr = query.toLowerCase().split(' ')
+			i = 0
+			while i < splitStr.length
+				splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1)
+				i++
+			query = splitStr.join ' '
+			#
 			resultPage = $(this).attr('action')
 			window.location.href = resultPage + '/?query=' + query
