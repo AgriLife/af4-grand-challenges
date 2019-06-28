@@ -176,6 +176,13 @@ class Ajax {
 					}
 				}
 
+				// Sort people alphabetically by last name.
+				usort(
+					$parsed_people,
+					function( $a, $b ) {
+						return strcmp( $a->ln, $b->ln );
+					}
+				);
 				$agrilife_people = $parsed_people;
 
 			} else {

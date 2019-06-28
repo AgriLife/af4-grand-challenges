@@ -10,7 +10,6 @@ AgriLife.People = class People
 				action: 'get_people'
 			success: (response) =>
 				response = JSON.parse(response)
-				@people = _.sortBy(response.people, 'lastname')
 				@filter(@getTerm())
 				$('#s').autocomplete source: response.specializations
 		)
