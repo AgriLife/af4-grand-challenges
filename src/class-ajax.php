@@ -101,50 +101,73 @@ class Ajax {
 
 					if ( 'faculty' === strtolower( $p['organizational_role'] ) ) {
 
-						$person                            = new \stdClass();
-						$person->firstname                 = $p['first_name'];
-						$person->middleinitial             = $p['middle_initial'];
-						$person->lastname                  = $p['last_name'];
-						$person->preferredname             = $p['preferred_name'];
-						$person->emailaddress              = $p['email_address'];
-						$person->website                   = $p['directory_profile'][0]['_links'][0]['website'];
-						$person->picture                   = $p['directory_profile'][0]['_links'][0]['picture'];
-						$person->cv                        = $p['directory_profile'][0]['_links'][0]['link_cv'];
-						$person->profile                   = $p['directory_profle'][0]['_links'][0]['website'];
-						$person->links                     = $p['directory_profle'][0]['_links'];
-						$person->department                = $p['positions'][0]['unit_name'];
-						$person->title                     = $p['positions'][0]['position_title'];
-						$person->organizationalrole        = $p['organizational_role'];
-						$person->phonenumber               = $p['phone_number'];
-						$person->physicaladdress1          = $p['physical_address_1'];
-						$person->physicaladdress2          = $p['physical_address_2'];
-						$person->physicaladdresscity       = $p['physical_address_city'];
-						$person->physicaladdressstate      = $p['physical_address_state'];
-						$person->physicaladdresspostalcode = $p['physical_address_postal_code'];
-						$person->unitname                  = $p['unit_name'];
+						// The length of the class property names greatly impacts the size of the JSON file.
+						$person     = new \stdClass();
+						$person->fn = $p['first_name'];
+
+						if ( $p['middle_initial'] ) {
+							$person->mi = $p['middle_initial'];
+						}
+
+						$person->ln = $p['last_name'];
+						$person->pn = $p['preferred_name'];
+						$person->em = $p['email_address'];
+						$person->dp = $p['positions'][0]['unit_name'];
+						$person->tl = $p['positions'][0]['position_title'];
+						$person->ph = $p['phone_number'];
+						$person->a1 = $p['physical_address_1'];
+
+						if ( $p['physical_address_2'] ) {
+							$person->a2 = $p['physical_address_2'];
+						}
+
+						$person->ct = $p['physical_address_city'];
+						$person->st = $p['physical_address_state'];
+						$person->zp = preg_replace( '/-\d+$/', '', $p['physical_address_postal_code'] );
+
+						if ( $p['directory_profile'][0]['_links'][0]['website'] ) {
+							$person->web = $p['directory_profile'][0]['_links'][0]['website'];
+						}
+
+						if ( $p['directory_profile'][0]['_links'][0]['picture'] ) {
+							$person->pc = $p['directory_profile'][0]['_links'][0]['picture'];
+						}
+
+						if ( $p['directory_profile'][0]['_links'][0]['link_cv'] ) {
+							$person->cv = $p['directory_profile'][0]['_links'][0]['link_cv'];
+						}
+
+						if ( $p['directory_profle'][0]['_links'] ) {
+							$person->lk = $p['directory_profle'][0]['_links'];
+						}
+
+						if ( $p['unit_name'] ) {
+							$person->ut = $p['unit_name'];
+						}
 
 						// Parse specializations.
-						if ( empty( $p['specializations'] ) ) {
-
-							$person->specializations = false;
-
-						} else {
+						if ( ! empty( $p['specializations'] ) ) {
 
 							$parsed = array();
 
 							foreach ( $p['specializations'] as $s ) {
 
-								if ( ! in_array( $s, $specializations, true ) ) {
+								// Capitalize specialization names in case faculty did not in their ALP settings.
+								$s = ucwords( $s );
 
-									array_push( $specializations, $s );
+								// Add unique specialization to collection.
+								if ( ! array_key_exists( $s, $specializations ) ) {
+
+									$index                 = count( $specializations );
+									$specializations[ $s ] = $index;
 
 								}
 
-								array_push( $parsed, strtolower( $s ) );
+								$parsed[] = $specializations[ $s ];
 
 							}
 
-							$person->specializations = $parsed;
+							$person->sp = $parsed;
 
 						}
 

@@ -18,7 +18,8 @@ AgriLife.People = class People
 	filter: (term) ->
 		$('#people-listing-ul').html('')
 		filtered = _.filter(@people, (person) =>
-			_.contains(person.specializations, term)
+			termID = @specializations.indexOf term
+			_.contains(person.sp, termID)
 		)
 		_.each(filtered, (person) =>
 			template = $('script#people-template').html()

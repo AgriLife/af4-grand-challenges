@@ -103,20 +103,20 @@ class Shortcode {
 			<li class="cell medium-4 small-12 people-listing-item p">
 				<div class="grid-x grid-margin-x role people-container">
 					<div class="cell shrink people-image">
-						{{ if ( ! _.isEmpty(picture)) { }}
-							{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}<img src="{{= picture }}" alt="{{= preferredname }} {{= lastname }}" />{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}
+						{{ if ( ! _.isUndefined(person.pc)) { }}
+							{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="{{= person.pc }}" alt="{{= person.pn }} {{= person.ln }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
 						{{ } else { }}
-							{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}<img src="<?php echo esc_url( AGFS_DIR_URL ); ?>img/agrilife-default-people-image-single.png" alt="{{= preferredname }} {{= lastname }}" />{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}
+							{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="<?php echo esc_url( AGFS_DIR_URL ); ?>img/agrilife-default-people-image-single.png" alt="{{= person.pn }} {{= person.ln }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
 						{{ } }}
 					</div>
 					<div class="cell auto info">
-						<h2 class="people-name p">{{ if ( ! _.isEmpty(profile)) { }}<a href="{{= profile }}">{{ } }}{{= preferredname }} {{= lastname }}{{ if ( ! _.isEmpty(profile)) { }}</a>{{ } }}</h2>
-						{{ if ( ! _.isEmpty(title)) { }}<p><strong>{{= title }}</strong></p>{{ } }}
-						<p class="people-dept">{{ if ( ! _.isEmpty(department)) { }}{{= department }}<br />{{ } }}
-							{{ if ( ! _.isEmpty(physicaladdress1)) { }}<em>{{= physicaladdress1 }}</em><br />{{ } }}
-							{{ if ( 'College Station' !== physicaladdresscity ) { }}{{ if ( ! _.isEmpty(physicaladdress2)) { }}<em>{{= physicaladdress2 }}</em><br />{{ } }}<em>{{ if ( ! _.isEmpty(physicaladdresscity) ) { }}{{= physicaladdresscity }}, {{ } }}{{ if ( ! _.isEmpty(physicaladdressstate) ) { }}{{= physicaladdressstate }} {{ } }}{{ if ( ! _.isEmpty(physicaladdresspostalcode) ) { }}{{= physicaladdresspostalcode.replace(/-\d+$/, '') }}{{ } }}</em>{{ } }}</p>
-						<p class="people-email email">{{ if ( ! _.isEmpty(phonenumber)) { }}<a href="tel:{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= phonenumber.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a><br />{{ } }}
-							<a href="mailto:{{= emailaddress }}">{{= _.escape(emailaddress) }}</a></p>
+						<h2 class="people-name p">{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}{{= person.pn }} {{= person.ln }}{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}</h2>
+						{{ if ( ! _.isEmpty(person.tl)) { }}<p><strong>{{= person.tl }}</strong></p>{{ } }}
+						<p class="people-dept">{{ if ( ! _.isEmpty(person.dp)) { }}{{= person.dp }}<br />{{ } }}
+							{{ if ( ! _.isEmpty(person.a1)) { }}<em>{{= person.a1 }}</em><br />{{ } }}
+							{{ if ( 'College Station' !== person.ct ) { }}{{ if ( ! _.isEmpty(person.a2)) { }}<em>{{= person.a2 }}</em><br />{{ } }}<em>{{ if ( ! _.isEmpty(person.ct) ) { }}{{= person.ct }}, {{ } }}{{ if ( ! _.isEmpty(person.st) ) { }}{{= person.st }} {{ } }}{{ if ( ! _.isEmpty(person.zp) ) { }}{{= person.zp }}{{ } }}</em>{{ } }}</p>
+						<p class="people-email email">{{ if ( ! _.isEmpty(person.ph)) { }}<a href="tel:{{= person.ph.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= person.ph.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a><br />{{ } }}
+							<a href="mailto:{{= person.em }}">{{= _.escape(person.em) }}</a></p>
 					</div>
 				</div>
 			</li>
