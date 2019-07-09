@@ -97,11 +97,11 @@ class Shortcode {
 
 				?>
 			</div>
-			<ul id="people-listing-ul" class="grid-x grid-margin-x reset"></ul>
+			<ul id="people-listing-ul" class="grid-x grid-padding-x reset"></ul>
 		</div>
 		<script type="text/template" id="people-template">
 			<li class="cell medium-4 small-12 people-listing-item p">
-				<div class="grid-x grid-margin-x role people-container">
+				<div class="grid-x grid-padding-x role people-container">
 					<div class="cell shrink people-image">
 						{{ if ( ! _.isUndefined(person.pc)) { }}
 							{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="{{= person.pc }}" alt="{{= person.pn }} {{= person.ln }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
