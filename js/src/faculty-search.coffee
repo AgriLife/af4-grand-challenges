@@ -48,7 +48,7 @@ AgriLife.People = class People
 		$('#people-listing-ul').html('')
 		filtered = _.filter(@people, (person) =>
 			termID = @specializations.indexOf term
-			_.contains(person.sp, termID)
+			_.contains(person.s, termID)
 		)
 		_.each(filtered, (person) =>
 			template = $('script#people-template').html()
@@ -59,6 +59,14 @@ AgriLife.People = class People
 			compiled = _.template template
 			_.templateSettings = saveSettings
 			person.d = @departments[person.d]
+			person.t = person.t.replace /\$P/g, 'Professor'
+				.replace /\$A/g, 'Associate'
+				.replace /\$E/g, 'Extension'
+				.replace /\$S/g, 'Specialist'
+				.replace /\$M/g, 'Management'
+				.replace /\$H/g, 'Department Head'
+			person.e = person.e.replace /\$AT/g, '@ag.tamu.edu'
+				.replace /\$T/g, '@tamu.edu'
 			output = compiled {person:person}
 			$('#people-listing-ul').append(output)
 		)

@@ -101,22 +101,20 @@ class Shortcode {
 		</div>
 		<script type="text/template" id="people-template">
 			<li class="cell medium-4 small-12 people-listing-item p">
-				<div class="grid-x grid-padding-x role people-container">
-					<div class="cell shrink people-image">
-						{{ if ( ! _.isUndefined(person.pc)) { }}
-							{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="{{= person.pc }}" alt="{{= person.pn }} {{= person.ln }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
-						{{ } else { }}
-							{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="<?php echo esc_url( AGFS_DIR_URL ); ?>img/agrilife-default-people-image-single.png" alt="{{= person.pn }} {{= person.ln }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
-						{{ } }}
-					</div>
-					<div class="cell auto info">
-						<h2 class="people-name p">{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}{{= person.pn }} {{= person.ln }}{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}</h2>
-						{{ if ( ! _.isEmpty(person.tl)) { }}<p><strong>{{= person.tl }}</strong></p>{{ } }}
-						<p class="people-dept">{{ if ( ! _.isEmpty(person.dp)) { }}{{= person.dp }}<br />{{ } }}
-							{{ if ( ! _.isEmpty(person.a1)) { }}<em>{{= person.a1 }}</em><br />{{ } }}
-							{{ if ( 'College Station' !== person.ct ) { }}{{ if ( ! _.isEmpty(person.a2)) { }}<em>{{= person.a2 }}</em><br />{{ } }}<em>{{ if ( ! _.isEmpty(person.ct) ) { }}{{= person.ct }}, {{ } }}{{ if ( ! _.isEmpty(person.st) ) { }}{{= person.st }} {{ } }}{{ if ( ! _.isEmpty(person.zp) ) { }}{{= person.zp }}{{ } }}</em>{{ } }}</p>
-						<p class="people-email email">{{ if ( ! _.isEmpty(person.ph)) { }}<a href="tel:{{= person.ph.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= person.ph.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a><br />{{ } }}
-							<a href="mailto:{{= person.em }}">{{= _.escape(person.em) }}</a></p>
+				<div class="role people-container">
+					<div class="person-info">
+						<div class="person-image">
+							{{ if ( ! _.isUndefined(person.pc)) { }}
+								{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="{{= person.pc }}" alt="{{= person.f }} {{= person.l }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
+							{{ } else { }}
+								{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="<?php echo esc_url( AGFS_DIR_URL ); ?>img/agrilife-default-people-image-single.png" alt="{{= person.f }} {{= person.l }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
+							{{ } }}
+						</div>
+						<h2 class="people-name p">{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}{{= person.f }} {{= person.l }}{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}</h2>
+						{{ if ( ! _.isEmpty(person.t)) { }}<p><strong>{{= person.t }}</strong></p>{{ } }}
+						{{ if ( ! _.isEmpty(person.d)) { }}<p class="people-dept">{{= person.d }}</p>{{ } }}
+						<p class="people-email email">{{ if ( ! _.isEmpty(person.p)) { }}<a href="tel:{{= person.p.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= person.p.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a><br />{{ } }}
+							<a href="mailto:{{= person.e }}">{{= _.escape(person.e) }}</a></p>
 					</div>
 				</div>
 			</li>
