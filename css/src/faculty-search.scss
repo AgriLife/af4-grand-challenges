@@ -2,13 +2,19 @@
 @import "settings";
 
 .people-search-form {
-	.button {
+	.category .button {
 		padding: 10px 25px;
 		margin: 0 $paragraph-margin-bottom / 2 $paragraph-margin-bottom / 2 $paragraph-margin-bottom / 2;
 
 		@include breakpoint(medium) {
 			margin: 0 $paragraph-margin-bottom $paragraph-margin-bottom $paragraph-margin-bottom;
 		}
+	}
+
+	button {
+		height: ($input-font-size * unitless-calc($input-line-height))
+			+ (get-side($input-padding, "top") + get-side($input-padding, "bottom")) - rem-calc(1);
+		margin: 0 0 $form-spacing $form-spacing;
 	}
 }
 
@@ -92,7 +98,7 @@
 	left: 0;
 	cursor: default;
 	list-style: none {
-		position: inside
+		position: inside;
 	}
 	padding: 0;
 	margin: 0;

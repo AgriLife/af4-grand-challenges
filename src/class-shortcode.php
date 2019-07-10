@@ -67,11 +67,11 @@ class Shortcode {
 				global $post;
 
 				$allowed_html = array(
-					'label' => array(),
-					'h4'    => array(
+					'label'  => array(),
+					'h4'     => array(
 						'class' => array(),
 					),
-					'form'  => array(
+					'form'   => array(
 						'action'     => array(),
 						'method'     => array(),
 						'id'         => array(),
@@ -80,14 +80,18 @@ class Shortcode {
 						'target'     => array(),
 						'novalidate' => array(),
 					),
-					'input' => array(
+					'input'  => array(
 						'type'        => array(),
 						'class'       => array(),
 						'name'        => array(),
 						'id'          => array(),
 						'placeholder' => array(),
 					),
-					'br'    => array(),
+					'button' => array(
+						'type'  => array(),
+						'class' => array(),
+					),
+					'br'     => array(),
 				);
 
 				echo wp_kses(
@@ -150,8 +154,9 @@ class Shortcode {
 			<label>
 				<h4 class="p">Enter a Grand category keyword to locate associated faculty</h4>
 			</label>
-			<form role="search" class="people-searchform" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $a['page'] ); ?>">
-				<input type="text" class="s" name="p" id="s" placeholder="Search for a term" /><br />
+			<form role="search" class="people-searchform grid-x" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $a['page'] ); ?>">
+				<input type="text" class="s cell auto" name="p" id="s" placeholder="Search for a term" />
+				<button type="submit" class="button cell shrink">Search</button>
 			</form>
 		<?php
 		$return = ob_get_clean();
