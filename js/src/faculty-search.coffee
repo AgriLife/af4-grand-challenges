@@ -3,6 +3,8 @@ AgriLife = {} if not AgriLife
 
 AgriLife.People = class People
 
+	lastTerm: ''
+
 	updateSpecs: (data) ->
 		$('#s').autocomplete 'option', 'source', data
 
@@ -50,6 +52,7 @@ AgriLife.People = class People
 			@init()
 
 	filter: (term) ->
+		@lastTerm = term
 		$('#people-listing-ul').html ''
 		filtered = _.filter(@people, (person) =>
 			termID = @specializations.indexOf term
@@ -91,15 +94,17 @@ AgriLife.People = class People
 				.toUpperCase() + splitStr[i].substring 1
 			i++
 		query = splitStr.join ' '
-		if history.pushState
-			# Update results without reloading
-			@filter query
-			newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?query=' + query
-			window.history.pushState({path:newurl},'',newurl)
-		else
-			# Redirect page
-			resultPage = $(this).attr 'action'
-			window.location.href = resultPage + '/?query=' + query
+
+		if @lastTerm isnt query
+			if history.pushState
+				# Update results without reloading
+				@filter query
+				newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?query=' + query
+				window.history.pushState({path:newurl},'',newurl)
+			else
+				# Redirect page
+				resultPage = $(this).attr 'action'
+				window.location.href = resultPage + '/?query=' + query
 
 do ( $ = jQuery ) ->
 	"use strict"
