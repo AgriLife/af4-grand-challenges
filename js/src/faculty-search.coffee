@@ -80,6 +80,27 @@ AgriLife.People = class People
 		url = document.URL.split('=')[1]
 		if url? then url.replace(/%20| /g, ' ') else url
 
+	submit: (e) ->
+		e.preventDefault()
+		query = $('input[name="p"]').val()
+		# Capitalize all words
+		splitStr = query.toLowerCase().split ' '
+		i = 0
+		while i < splitStr.length
+			splitStr[i] = splitStr[i].charAt 0
+				.toUpperCase() + splitStr[i].substring 1
+			i++
+		query = splitStr.join ' '
+		if history.pushState
+			# Update results without reloading
+			@filter query
+			newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?query=' + query
+			window.history.pushState({path:newurl},'',newurl)
+		else
+			# Redirect page
+			resultPage = $(this).attr 'action'
+			window.location.href = resultPage + '/?query=' + query
+
 do ( $ = jQuery ) ->
 	"use strict"
 	$ ->
@@ -94,15 +115,4 @@ do ( $ = jQuery ) ->
 			people.filter $(this).data 'category'
 
 		$('.people-searchform').on 'submit', (e) ->
-			e.preventDefault()
-			query = $('input[name="p"]').val()
-			# Capitalize all words
-			splitStr = query.toLowerCase().split(' ')
-			i = 0
-			while i < splitStr.length
-				splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1)
-				i++
-			query = splitStr.join ' '
-			#
-			resultPage = $(this).attr('action')
-			window.location.href = resultPage + '/?query=' + query
+			people.submit e
