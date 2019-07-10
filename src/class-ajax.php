@@ -100,15 +100,22 @@ class Ajax {
 
 				foreach ( $payload as $p ) {
 
-					if ( 'faculty' === strtolower( $p['organizational_role'] ) ) {
+					$title             = $p['positions'][0]['position_title'];
+					$skip              = false;
+					$prohibited_titles = array( 'Adjunct Professor', 'Professor Emeritus', 'Assistant Professor', 'Retired', 'Visiting Professor' );
 
 						// The length of the class property names greatly impacts the size of the JSON file.
 						$person     = new \stdClass();
 						$person->fn = $p['first_name'];
+					if ( 'faculty' !== strtolower( $p['organizational_role'] ) ||
+						empty( $p['specializations'] ) ||
+						false === strpos( $title, 'Professor' )
+					) {
 
 						if ( $p['middle_initial'] ) {
 							$person->mi = $p['middle_initial'];
 						}
+						$skip = true;
 
 						$person->ln = $p['last_name'];
 						$person->pn = $p['preferred_name'];
@@ -117,26 +124,38 @@ class Ajax {
 						$person->tl = $p['positions'][0]['position_title'];
 						$person->ph = $p['phone_number'];
 						$person->a1 = $p['physical_address_1'];
+					} else {
 
 						if ( $p['physical_address_2'] ) {
 							$person->a2 = $p['physical_address_2'];
 						}
+						foreach ( $prohibited_titles as $value ) {
 
 						$person->ct = $p['physical_address_city'];
 						$person->st = $p['physical_address_state'];
 						$person->zp = preg_replace( '/-\d+$/', '', $p['physical_address_postal_code'] );
+							if ( false !== strpos( $title, $value ) ) {
 
 						if ( $p['directory_profile'][0]['_links'][0]['website'] ) {
 							$person->web = $p['directory_profile'][0]['_links'][0]['website'];
 						}
+								$skip = true;
+								break;
 
 						if ( $p['directory_profile'][0]['_links'][0]['picture'] ) {
 							$person->pc = $p['directory_profile'][0]['_links'][0]['picture'];
+							}
 						}
+					}
 
 						if ( $p['directory_profile'][0]['_links'][0]['link_cv'] ) {
 							$person->cv = $p['directory_profile'][0]['_links'][0]['link_cv'];
 						}
+					if ( $skip ) {
+
+						continue;
+
+					}
 
 						if ( $p['directory_profle'][0]['_links'] ) {
 							$person->lk = $p['directory_profle'][0]['_links'];
