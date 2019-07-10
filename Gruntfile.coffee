@@ -15,6 +15,7 @@ module.exports = (grunt) ->
 		sass:
 			pkg:
 				options:
+					loadPath: 'node_modules/foundation-sites/scss'
 					sourcemap: 'none'
 					style: 'compressed'
 					precision: 2
@@ -22,6 +23,7 @@ module.exports = (grunt) ->
 					'css/faculty-search.css': 'css/src/faculty-search.scss'
 			dev:
 				options:
+					loadPath: 'node_modules/foundation-sites/scss'
 					style: 'expanded'
 					precision: 2
 				files:
