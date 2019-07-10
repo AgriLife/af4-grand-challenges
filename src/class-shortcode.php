@@ -46,20 +46,20 @@ class Shortcode {
 		wp_enqueue_script( 'agrilife-faculty-search' );
 
 		ob_start(); ?>
-		<div class="gc-list">
+		<div class="afs-list">
 			<div class="people-search-form center">
 				<label class="p">
 					<h4>Search faculty by specialty</h4>
 				</label>
-				<div class="grid-x p">
+				<div class="grid-x">
 					<div class="cell medium-6 small-12 category" data-category="Food"><a href="#Food" class="button expanded button-radius secondary">Feeding Our World</a></div>
 					<div class="cell medium-6 small-12 category" data-category="Environment"><a href="#Environment" class="button expanded button-radius secondary">Protecting Our Environment</a></div>
 				</div>
-				<div class="grid-x p">
+				<div class="grid-x">
 					<div class="cell medium-6 small-12 category" data-category="Health"><a href="#Health" class="button expanded button-radius secondary">Improving Our Health</a></div>
 					<div class="cell medium-6 small-12 category" data-category="Youth"><a href="#Youth" class="button expanded button-radius secondary">Enriching Our Youth</a></div>
 				</div>
-				<div class="grid-x p">
+				<div class="grid-x">
 					<div class="cell medium-6 small-12 category" data-category="Economy"><a href="#Economy" class="button expanded button-radius secondary">Growing Our Economy</a></div>
 				</div>
 				<?php
