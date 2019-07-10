@@ -17,7 +17,7 @@ AgriLife.People = class People
 				@specializations = response.specializations
 				@departments = response.departments
 
-				if $('#s').data('ui-autocomplete')
+				if $('#s').data 'ui-autocomplete'
 					@update
 				else
 					@init
@@ -36,19 +36,24 @@ AgriLife.People = class People
 		$('#s').autocomplete source: @specializations
 
 	tryInitLocalStorage: ->
-		if localStorage.getItem('agrilife-people-faculty') and
-		localStorage.getItem('agrilife-people-specializations') isnt null and
-		localStorage.getItem('agrilife-people-specializations') isnt "false"
-			@people = JSON.parse localStorage.getItem 'agrilife-people-faculty'
-			@specializations = JSON.parse localStorage.getItem 'agrilife-people-specializations'
-			@departments = JSON.parse localStorage.getItem 'agrilife-people-departments'
+		faculty = localStorage.getItem 'agrilife-people-faculty'
+		departments = localStorage.getItem 'agrilife-people-departments'
+		specializations = localStorage.getItem 'agrilife-people-specializations'
+
+		if faculty isnt 'false' and
+		faculty isnt 'null' and
+		departments isnt 'null' and
+		specializations isnt 'null'
+			@people = JSON.parse faculty
+			@specializations = JSON.parse specializations
+			@departments = JSON.parse departments
 			@init()
 
 	filter: (term) ->
-		$('#people-listing-ul').html('')
+		$('#people-listing-ul').html ''
 		filtered = _.filter(@people, (person) =>
 			termID = @specializations.indexOf term
-			_.contains(person.s, termID)
+			_.contains person.s, termID
 		)
 		_.each(filtered, (person) =>
 			template = $('script#people-template').html()
@@ -68,7 +73,7 @@ AgriLife.People = class People
 			person.e = person.e.replace /\$AT/g, '@ag.tamu.edu'
 				.replace /\$T/g, '@tamu.edu'
 			output = compiled {person:person}
-			$('#people-listing-ul').append(output)
+			$('#people-listing-ul').append output
 		)
 
 	getTerm: () ->
@@ -86,7 +91,7 @@ do ( $ = jQuery ) ->
 		people.get()
 
 		$('.people-search-form .category').click (e) ->
-			people.filter($(this).data('category'))
+			people.filter $(this).data 'category'
 
 		$('.people-searchform').on 'submit', (e) ->
 			e.preventDefault()
