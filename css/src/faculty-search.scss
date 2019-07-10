@@ -15,6 +15,23 @@
 		height: ($input-font-size * unitless-calc($input-line-height))
 			+ (get-side($input-padding, "top") + get-side($input-padding, "bottom")) - rem-calc(1);
 		margin: 0 0 $form-spacing $form-spacing;
+
+		@include breakpoint(small only) {
+			padding: 0;
+			width: ($input-font-size * unitless-calc($input-line-height))
+				+ (get-side($input-padding, "top") + get-side($input-padding, "bottom")) - rem-calc(1);
+			background: transparent
+			url("../../../../../wp-content/themes/agriflex4/images/search-agrilife.png")
+			no-repeat {
+				size: contain;
+			}
+			overflow: hidden;
+			text-indent: 100%;
+
+			&:hover {
+				background-color: transparent;
+			}
+		}
 	}
 }
 

@@ -87,6 +87,9 @@ class Shortcode {
 						'id'          => array(),
 						'placeholder' => array(),
 					),
+					'div'    => array(
+						'class' => array(),
+					),
 					'button' => array(
 						'type'  => array(),
 						'class' => array(),
@@ -156,7 +159,7 @@ class Shortcode {
 			</label>
 			<form role="search" class="people-searchform grid-x" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $a['page'] ); ?>">
 				<input type="text" class="s cell auto" name="p" id="s" placeholder="Search for a term" />
-				<button type="submit" class="button cell shrink">Search</button>
+				<div class="cell shrink"><button type="submit" class="button">Search</button></div>
 			</form>
 		<?php
 		$return = ob_get_clean();
