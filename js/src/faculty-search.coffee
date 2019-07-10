@@ -15,6 +15,7 @@ AgriLife.People = class People
 				response = JSON.parse response
 				@people = response.people
 				@specializations = response.specializations
+				@departments = response.departments
 
 				if $('#s').data('ui-autocomplete')
 					@update
@@ -23,6 +24,7 @@ AgriLife.People = class People
 
 				localStorage.setItem 'agrilife-people-faculty', JSON.stringify response.people
 				localStorage.setItem 'agrilife-people-specializations', JSON.stringify response.specializations
+				localStorage.setItem 'agrilife-people-departments', JSON.stringify response.departments
 		)
 
 	update: ->
@@ -39,6 +41,7 @@ AgriLife.People = class People
 		localStorage.getItem('agrilife-people-specializations') isnt "false"
 			@people = JSON.parse localStorage.getItem 'agrilife-people-faculty'
 			@specializations = JSON.parse localStorage.getItem 'agrilife-people-specializations'
+			@departments = JSON.parse localStorage.getItem 'agrilife-people-departments'
 			@init()
 
 	filter: (term) ->
@@ -55,6 +58,7 @@ AgriLife.People = class People
 				interpolate : /\{\{=(.+?)\}\}/g
 			compiled = _.template template
 			_.templateSettings = saveSettings
+			person.d = @departments[person.d]
 			output = compiled {person:person}
 			$('#people-listing-ul').append(output)
 		)

@@ -96,6 +96,7 @@ class Ajax {
 				$payload         = $results['people'];
 				$parsed_people   = array();
 				$specializations = array();
+				$departments     = array();
 
 				foreach ( $payload as $p ) {
 
@@ -140,10 +141,22 @@ class Ajax {
 						if ( $p['directory_profle'][0]['_links'] ) {
 							$person->lk = $p['directory_profle'][0]['_links'];
 						}
+					// Handle departments
+					// Handle departments.
+					$dept = $p['positions'][0]['unit_name'];
 
 						if ( $p['unit_name'] ) {
 							$person->ut = $p['unit_name'];
 						}
+					// Add unique department to collection.
+					if ( ! array_key_exists( $dept, $departments ) ) {
+
+						$index                = count( $departments );
+						$departments[ $dept ] = $index;
+
+					}
+
+					$person->d = $departments[ $dept ];
 
 						// Parse specializations.
 						if ( ! empty( $p['specializations'] ) ) {
@@ -186,11 +199,13 @@ class Ajax {
 				$agrilife_people = $parsed_people;
 
 				$specializations = array_keys( $specializations );
+				$departments     = array_keys( $departments );
 
 			} else {
 
 				$agrilife_people = false;
 				$specializations = false;
+				$departments     = false;
 
 			}
 
@@ -204,6 +219,7 @@ class Ajax {
 			'cached'          => $cached,
 			'people'          => $agrilife_people,
 			'specializations' => $specializations,
+			'departments'     => $departments,
 		);
 
 		die( wp_json_encode( $return ) );
