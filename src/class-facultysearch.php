@@ -41,43 +41,29 @@ class FacultySearch {
 	 */
 	private function __construct() {
 
-		// Check dependency.
-		require_once AGFS_DIR_PATH . '/src/class-checkdependency.php';
-		$check = new \FacultySearch\CheckDependency();
-
-		if ( $check->has_all_dependencies() ) {
-
-			add_action( 'init', array( $this, 'init' ) );
-
-		}
+		$this->require_classes();
 
 	}
 
 	/**
-	 * Initialize the various classes
+	 * Load classes so they are visible to plugins.
 	 *
-	 * @since 0.1.0
+	 * @since 0.2.0
 	 * @return void
 	 */
-	public function init() {
+	private function require_classes() {
 
 		// Load required assets.
 		require_once AGFS_DIR_PATH . '/src/class-assets.php';
-		$assets = new \FacultySearch\Assets();
+		$afs_assets = new \FacultySearch\Assets();
 
 		// Load shortcodes.
 		require_once AGFS_DIR_PATH . '/src/class-shortcode.php';
-		$shortcode = new \FacultySearch\Shortcode();
+		$afs_shortcode = new \FacultySearch\Shortcode();
 
 		// Load ajax.
 		require_once AGFS_DIR_PATH . '/src/class-ajax.php';
-		$ajax = new \FacultySearch\Ajax();
-
-		/* Flush rewrite rules on plugin installation */
-		if ( get_option( 'agfs_flush_rewrite_rules_flag' ) ) {
-			flush_rewrite_rules();
-			delete_option( 'agfs_rewrite_rules_flag' );
-		}
+		$afs_ajax = new \FacultySearch\Ajax();
 
 	}
 
