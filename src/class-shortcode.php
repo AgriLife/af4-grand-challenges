@@ -37,11 +37,22 @@ class Shortcode {
 	 * Output for faculty_search_categories shortcode.
 	 *
 	 * @since 0.1.0
+	 * @param array $atts Shortcode attributes.
 	 * @return string
 	 */
-	public function create_shortcode() {
+	public function create_shortcode( $atts ) {
 
-		\FacultySearch\Ajax::set_ajax_url();
+		$a = shortcode_atts(
+			array(
+				'page'           => '',
+				'specialization' => '',
+			),
+			$atts
+		);
+
+		$a['specialization'] = esc_url( $a['specialization'] );
+
+		\FacultySearch\Ajax::set_ajax_url( $a['specialization'] );
 		wp_enqueue_style( 'agrilife-faculty-search' );
 		wp_enqueue_script( 'agrilife-faculty-search' );
 
@@ -72,13 +83,14 @@ class Shortcode {
 						'class' => array(),
 					),
 					'form'   => array(
-						'action'     => array(),
-						'method'     => array(),
-						'id'         => array(),
-						'class'      => array(),
-						'name'       => array(),
-						'target'     => array(),
-						'novalidate' => array(),
+						'action'              => array(),
+						'method'              => array(),
+						'id'                  => array(),
+						'class'               => array(),
+						'name'                => array(),
+						'target'              => array(),
+						'novalidate'          => array(),
+						'data-specialization' => array(),
 					),
 					'input'  => array(
 						'type'        => array(),
@@ -98,7 +110,12 @@ class Shortcode {
 				);
 
 				echo wp_kses(
-					$this->create_search( array( 'page' => $post->post_name ) ),
+					$this->create_search(
+						array(
+							'page'           => $post->post_name,
+							'specialization' => $a['specialization'],
+						)
+					),
 					$allowed_html
 				);
 
@@ -145,11 +162,15 @@ class Shortcode {
 
 		$a = shortcode_atts(
 			array(
-				'page' => '',
+				'page'           => '',
+				'specialization' => '',
 			),
 			$atts
 		);
-		\FacultySearch\Ajax::set_ajax_url();
+
+		$a['specialization'] = esc_url( $a['specialization'] );
+
+		\FacultySearch\Ajax::set_ajax_url( $a['specialization'] );
 		wp_enqueue_style( 'agrilife-faculty-search' );
 		wp_enqueue_script( 'agrilife-faculty-search' );
 		ob_start();
@@ -157,7 +178,7 @@ class Shortcode {
 			<label>
 				<h4 class="p">Enter a Grand category keyword to locate associated faculty</h4>
 			</label>
-			<form role="search" class="people-searchform grid-x" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $a['page'] ); ?>">
+			<form role="search" class="people-searchform grid-x" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $a['page'] ); ?>" data-specialization="<?php echo esc_attr( $a['specialization'] ); ?>">
 				<input type="text" class="s cell auto" name="p" id="s" placeholder="Search for a term" />
 				<div class="cell shrink"><button type="submit" class="button">Search</button></div>
 			</form>

@@ -15,8 +15,8 @@
 
 ## Features
 Shortcodes:
-1. [faculty_search_categories] Shows the faculty search form with category buttons.
-2. [faculty_search] Shows the faculty search form.
+1. [faculty_search_categories] Shows the faculty search form with category buttons. Optional "specialization" parameter to restrict results to a certain specialization.
+2. [faculty_search] Shows the faculty search form. Optional "specialization" parameter to restrict results to a certain specialization.
 
 ## Development Installation
 

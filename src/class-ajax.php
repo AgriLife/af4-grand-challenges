@@ -44,13 +44,14 @@ class Ajax {
 	 * Set the ajax url and generate the admin url as a JavaScript variable.
 	 *
 	 * @since 0.1.0
+	 * @param string $specialization Faculty specialization to restrict results to.
 	 * @param string $handle Registered script handle.
 	 * @return void
 	 */
-	public static function set_ajax_url( $handle = 'agrilife-faculty-search' ) {
+	public static function set_ajax_url( $specialization = '', $handle = 'agrilife-faculty-search' ) {
 
 		$url = array(
-			'ajax' => self::$ajax_url,
+			'ajax' => self::$ajax_url . '?specialization=' . $specialization,
 		);
 
 		wp_localize_script( $handle, 'url', $url );
@@ -65,6 +66,18 @@ class Ajax {
 	 * @return void
 	 */
 	public function get_people() {
+
+		if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+
+			$query = sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) );
+			preg_match( '/specialization=[^&]*/', esc_url( $query ), $specialization_param );
+			$faculty_specialization = ucwords( str_replace( 'specialization=', '', $specialization_param[0] ) );
+
+		} else {
+
+			$faculty_specialization = '';
+
+		}
 
 		$cached          = true;
 		$agrilife_people = get_transient( 'agrilife_faculty_list' );
@@ -104,9 +117,11 @@ class Ajax {
 					$skip              = false;
 					$prohibited_titles = array( 'Adjunct Professor', 'Professor Emeritus', 'Assistant Professor', 'Retired', 'Visiting Professor' );
 
-					if ( 'faculty' !== strtolower( $p['organizational_role'] ) ||
+					if (
+						'faculty' !== strtolower( $p['organizational_role'] ) ||
 						empty( $p['specializations'] ) ||
-						false === strpos( $title, 'Professor' )
+						false === strpos( $title, 'Professor' ) ||
+						( ! empty( $faculty_specialization ) && ! in_array( $faculty_specialization, $p['specializations'], true ) )
 					) {
 
 						$skip = true;
@@ -180,6 +195,8 @@ class Ajax {
 					}
 
 					// Parse specializations.
+					// To save file size: move the full specialization name to a top-level array with an index,
+					// then assign that index to the person's specialization list.
 					if ( ! empty( $p['specializations'] ) ) {
 
 						$parsed = array();
@@ -217,7 +234,6 @@ class Ajax {
 					}
 				);
 				$agrilife_people = $parsed_people;
-
 				$specializations = array_keys( $specializations );
 				$departments     = array_keys( $departments );
 

@@ -14,6 +14,7 @@ AgriLife.People = class People
 			data:
 				action: 'get_people'
 			success: (response) =>
+				prefix = 'agrilife-people-' + @level
 				response = JSON.parse response
 				@people = response.people
 				@specializations = response.specializations
@@ -24,23 +25,24 @@ AgriLife.People = class People
 				else
 					@init
 
-				localStorage.setItem 'agrilife-people-faculty', JSON.stringify response.people
-				localStorage.setItem 'agrilife-people-specializations', JSON.stringify response.specializations
-				localStorage.setItem 'agrilife-people-departments', JSON.stringify response.departments
+				localStorage.setItem prefix + '-faculty', JSON.stringify response.people
+				localStorage.setItem prefix + '-specializations', JSON.stringify response.specializations
+				localStorage.setItem prefix + '-departments', JSON.stringify response.departments
 		)
 
 	update: ->
-		@filter @getTerm()
 		$('#s').autocomplete 'option', 'source', @specializations
+		@filter @getTerm()
 
 	init: ->
 		@filter @getTerm()
 		$('#s').autocomplete source: @specializations
 
 	tryInitLocalStorage: ->
-		faculty = localStorage.getItem 'agrilife-people-faculty'
-		departments = localStorage.getItem 'agrilife-people-departments'
-		specializations = localStorage.getItem 'agrilife-people-specializations'
+		prefix = 'agrilife-people-' + @level
+		faculty = localStorage.getItem prefix + '-faculty'
+		departments = localStorage.getItem prefix + '-departments'
+		specializations = localStorage.getItem prefix + '-specializations'
 
 		if faculty isnt 'false' and
 		faculty isnt 'null' and
@@ -111,6 +113,8 @@ do ( $ = jQuery ) ->
 	$ ->
 
 		people = new AgriLife.People
+
+		people.level = $('.people-searchform').data 'faculty-level'
 
 		people.tryInitLocalStorage()
 
