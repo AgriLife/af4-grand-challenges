@@ -121,24 +121,23 @@ class Shortcode {
 
 				?>
 			</div>
-			<ul id="people-listing-ul" class="grid-x grid-padding-x reset"></ul>
+			<ul id="people-listing-ul" class="reset"></ul>
 		</div>
 		<script type="text/template" id="people-template">
-			<li class="cell medium-4 small-12 people-listing-item p">
-				<div class="role people-container">
-					<div class="person-info">
-						<div class="person-image">
+			<li class="people-listing-item p">
+				<div class="role people-container grid-container">
+					<div class="person-info grid-x grid-padding-x">
+						<div class="person-image cell">
 							{{ if ( ! _.isUndefined(person.pc)) { }}
 								{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="{{= person.pc }}" alt="{{= person.f }} {{= person.l }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
 							{{ } else { }}
 								{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="<?php echo esc_url( AGFS_DIR_URL ); ?>img/agrilife-default-people-image-single.png" alt="{{= person.f }} {{= person.l }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
 							{{ } }}
 						</div>
-						<h2 class="people-name p">{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}{{= person.f }} {{= person.l }}{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}</h2>
-						{{ if ( ! _.isEmpty(person.t)) { }}<p><strong>{{= person.t }}</strong></p>{{ } }}
-						{{ if ( ! _.isEmpty(person.d)) { }}<p class="people-dept">{{= person.d }}</p>{{ } }}
-						<p class="people-email email">{{ if ( ! _.isEmpty(person.p)) { }}<a href="tel:{{= person.p.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= person.p.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a><br />{{ } }}
-							<a href="mailto:{{= person.e }}">{{= _.escape(person.e) }}</a></p>
+						<div class="person-name cell"><h2 class="people-name p">{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}{{= person.f }} {{= person.l }}{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}</h2>{{ if ( ! _.isEmpty(person.t)) { }}<br /><strong>{{= person.t }}</strong>{{ } }}</div>
+						<div class="person-contact cell">{{ if ( ! _.isEmpty(person.p)) { }}<a href="tel:{{= person.p.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '+1-$1-$2-$3') }}">{{= person.p.replace(/^(\d{3})\D+(\d{3})\D+(\d{4})/, '($1) $2-$3') }}</a><br />{{ } }}{{ if ( ! _.isEmpty(person.e)) { }}<p class="people-email email"><a href="mailto:{{= person.e }}">{{= _.escape(person.e) }}</a></p>{{ } }}</div>
+						<div class="person-dept cell">{{ if ( ! _.isEmpty(person.d)) { }}{{= person.d }}{{ } }}</div>
+						<div class="person-interests cell"></div>
 					</div>
 				</div>
 			</li>

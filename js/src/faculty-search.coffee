@@ -14,16 +14,18 @@ AgriLife.People = class People
 			data:
 				action: 'get_people'
 			success: (response) =>
-				prefix = 'agrilife-people-' + @level
+				prefix = 'agrilife-people-';
+				if @specialization then prefix += @specialization
+				else prefix += 'all'
 				response = JSON.parse response
 				@people = response.people
 				@specializations = response.specializations
 				@departments = response.departments
 
 				if $('#s').data 'ui-autocomplete'
-					@update
+					@update()
 				else
-					@init
+					@init()
 
 				localStorage.setItem prefix + '-faculty', JSON.stringify response.people
 				localStorage.setItem prefix + '-specializations', JSON.stringify response.specializations
@@ -37,21 +39,31 @@ AgriLife.People = class People
 	init: ->
 		@filter @getTerm()
 		$('#s').autocomplete source: @specializations
+		@attachEvents()
 
 	tryInitLocalStorage: ->
-		prefix = 'agrilife-people-' + @level
+		prefix = 'agrilife-people-' + @specialization
 		faculty = localStorage.getItem prefix + '-faculty'
 		departments = localStorage.getItem prefix + '-departments'
 		specializations = localStorage.getItem prefix + '-specializations'
 
-		if faculty isnt 'false' and
-		faculty isnt 'null' and
-		departments isnt 'null' and
-		specializations isnt 'null'
+		if faculty isnt false and
+		faculty isnt null and
+		departments isnt null and
+		specializations isnt null
 			@people = JSON.parse faculty
 			@specializations = JSON.parse specializations
 			@departments = JSON.parse departments
 			@init()
+
+	attachEvents: ->
+		people = this
+
+		$('.people-search-form .category').click (e) ->
+			people.filter $(this).data 'category'
+
+		$('.people-searchform').on 'submit', (e) ->
+			people.submit e
 
 	filter: (term) ->
 		@lastTerm = term
@@ -114,14 +126,8 @@ do ( $ = jQuery ) ->
 
 		people = new AgriLife.People
 
-		people.level = $('.people-searchform').data 'faculty-level'
+		people.specialization = $('.people-searchform').data 'specialization'
 
 		people.tryInitLocalStorage()
 
 		people.get()
-
-		$('.people-search-form .category').click (e) ->
-			people.filter $(this).data 'category'
-
-		$('.people-searchform').on 'submit', (e) ->
-			people.submit e
