@@ -1,6 +1,10 @@
 @import "foundation";
 @import "settings";
 
+.people-listing-item:nth-child(2n) {
+	background-color: transparent;
+}
+
 .people-search-form {
 	.category .button {
 		padding: 10px 25px;
@@ -34,8 +38,21 @@
 		}
 	}
 
-	#searchform button {
-		margin-left: 0;
+	#searchform {
+		@include breakpoint(medium) {
+			flex-wrap: nowrap;
+			margin-left: -.5rem;
+			margin-right: -.5rem;
+
+			> .cell {
+				padding: 0 .5rem;
+			}
+		}
+
+		button {
+			margin-left: 0;
+			width: 100%;
+		}
 	}
 }
 

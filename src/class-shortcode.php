@@ -120,7 +120,7 @@ class Shortcode {
 				?>
 					<div class="faculty-search-header grid-container">
 						<form role="search" class="people-searchform grid-x grid-padding-x" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $post->post_name ); ?>" data-specialization="<?php echo esc_attr( $a['specialization'] ); ?>">
-							<div class="cell medium-4"><select name="department" id="department"><option value="">Department</option>%s</select></div><div class="cell medium-4"><input type="text" class="s" name="p" id="s" placeholder="Search for a term" /></div>
+							<div class="cell medium-3"><select name="department" id="department"><option value="">Department</option>%s</select></div><div class="cell medium-3"><input type="text" class="s" name="p" id="s" placeholder="Search for a term" /></div><div class="cell medium-2"><input type="text" class="s" name="facultyname" id="n" placeholder="Enter name" /></div>
 							<div class="cell medium-2"><button type="submit" class="button">Filter</button></div>
 							<div class="cell medium-2"><button type="button" class="button clear">Clear</button></div>
 						</form>
@@ -130,6 +130,7 @@ class Shortcode {
 
 				$departments = '';
 				$dept_data   = get_transient( 'agrilife_faculty_departments' );
+				$dept_data   = array( 'Vernon Research and Extension Center', 'Poultry Science', 'Amarillo Research and Extension Center', 'District 12 Office - South', 'Agricultural Economics', 'Temple Research and Extension Center', 'Plant Pathology and Microbiology', 'Horticultural Sciences', 'Soil and Crop Sciences', 'Animal Science', 'Entomology', 'Dallas Research and Extension Center', 'Ecosystem Science and Management (ESSM)', 'Agricultural Leadership, Education and Communication (ALEC)', 'Corpus Christi Research and Extension Center', 'Lubbock Research and Extension Center', 'District 01 Office - Panhandle', 'Biological and Agricultural Engineering (BAEN)', 'Overton Research and Extension Center', 'Recreation, Park and Tourism Sciences (RPTS)', 'Organizational Development', 'Borlaug Institute of International Agriculture', 'Wildlife and Fisheries Sciences', 'El Paso Research and Extension Center', 'Uvalde Research and Extension Center', 'Stephenville Research and Extension Center', 'District 02 Office - South Plains', 'San Angelo Research and Extension Center' );
 				if ( false !== $dept_data ) {
 					foreach ( $dept_data as $key => $value ) {
 						$departments .= sprintf( '<option value="%s">%s</option>', $key, $value );
@@ -209,9 +210,9 @@ class Shortcode {
 		?>
 			<div class="faculty-search-header grid-container">
 				<form role="search" class="people-searchform grid-x grid-padding-x p" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $a['page'] ); ?>" data-specialization="<?php echo esc_attr( $a['specialization'] ); ?>">
-					<div class="cell medium-auto"><select name="department" id="department">Department</select></div><div class="cell medium-2"><select name="specialization" id="specialization">Research Area</select></div><div class="cell medium-2"><input type="text" name="name" id="name" placeholder="Search by name" /></div>
-					<div class="cell shrink"><button type="button" class="button">Filter</button></div>
-					<div class="cell shrink"><button type="button" class="button clear">Clear</button></div>
+					<div class="cell medium-3"><select name="department" id="department"><option value="">Department</option>%s</select></div><div class="cell medium-3"><input type="text" class="s" name="p" id="s" placeholder="Search for a term" /></div><div class="cell medium-2"><input type="text" class="s" name="person_name" id="n" placeholder="Enter name" /></div>
+					<div class="cell medium-2"><button type="submit" class="button">Filter</button></div>
+					<div class="cell medium-2"><button type="button" class="button clear">Clear</button></div>
 				</form>
 			</div>
 		<?php
