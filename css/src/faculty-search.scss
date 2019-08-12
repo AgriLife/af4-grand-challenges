@@ -33,13 +33,22 @@
 			}
 		}
 	}
+
+	#searchform button {
+		margin-left: 0;
+	}
 }
 
 .afs-list {
-	h2 {
+	select,
+	button,
+	input {
+		margin-bottom: 0;
+	}
+
+	.h2 {
 		text-align: left;
 		font-size: 1.7rem;
-		width: 100%;
 		hyphens: auto;
 
 		&::after {
@@ -47,32 +56,59 @@
 		}
 	}
 
-	.people-listing-item {
-		p,
-		.p {
-			margin-bottom: $paragraph-margin-bottom / 2;
-		}
+	p,
+	.p {
+		margin-bottom: $paragraph-margin-bottom / 2;
 	}
 
-	.person-image {
-		padding: 0 $grid-padding-gutters / 2 $grid-padding-gutters / 2 0;
-		display: inline-block;
-		width: 33.33%;
-		float: left;
-
-		@include breakpoint(medium) {
-			width: 50%;
-		}
+	.grid-container {
+		padding: $paragraph-margin-bottom / 2;
 	}
-	@include breakpoint(medium) {
-		@include breakpoint(1000px down) {
-			.content-sidebar .person-image {
-				width: 100%;
-				padding: {
-					left: 0;
-					right: 0;
-				}
+
+	ul .cell:first-child,
+	.column-headings .cell:first-child {
+		width: 82px;
+	}
+
+	.column-headings .cell.medium-auto {
+		width: 29.8%;
+	}
+
+	.faculty-search-header {
+		background-color: $gray-lighter;
+	}
+
+	.medium-21 {
+		width: 21%;
+	}
+
+	> ul {
+		> li {
+			position: relative;
+
+			&.item-odd {
+				background-color: $gray-lighter;
 			}
+		}
+
+		button {
+			position: absolute;
+			bottom: $grid-padding-gutters / 2;
+			right: $grid-padding-gutters / 2;
+			line-height: normal;
+			cursor: pointer;
+			font-family: Consolas, monospace;
+		}
+
+		ul {
+			margin-left: 0;
+			list-style-position: inside;
+			max-height: 102px;
+			overflow: hidden;
+		}
+
+		> li.expanded ul {
+			max-height: none;
 		}
 	}
 

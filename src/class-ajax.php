@@ -51,7 +51,7 @@ class Ajax {
 	public static function set_ajax_url( $specialization = '', $handle = 'agrilife-faculty-search' ) {
 
 		$url = array(
-			'ajax' => self::$ajax_url . '?specialization=' . $specialization,
+			'ajax' => esc_url( self::$ajax_url . '?specialization=' . $specialization ),
 		);
 
 		wp_localize_script( $handle, 'url', $url );
@@ -167,8 +167,8 @@ class Ajax {
 					// Add unique department to collection.
 					if ( ! array_key_exists( $dept, $departments ) ) {
 
-						$index                = count( $departments );
-						$departments[ $dept ] = $index;
+						$dept_index           = count( $departments );
+						$departments[ $dept ] = $dept_index;
 
 					}
 
