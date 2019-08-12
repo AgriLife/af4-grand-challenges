@@ -16,7 +16,7 @@ module.exports = (grunt) ->
 			pkg:
 				options:
 					loadPath: 'node_modules/foundation-sites/scss'
-					sourcemap: 'none'
+					noSourceMap: true
 					style: 'compressed'
 					precision: 2
 				files:
