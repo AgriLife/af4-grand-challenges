@@ -52,6 +52,26 @@
 		button {
 			margin-left: 0;
 			width: 100%;
+			border-radius: 19px;
+			color: $whiter;
+			padding: {
+				left: 2px;
+				right: 2px;
+			}
+			font-size: 14px;
+
+			&.maroon {
+				background-color: $maroon;
+			}
+
+			&.dark-gray {
+				background-color: $gray-dark;
+			}
+
+			&:active,
+			&:hover {
+				border: 1px dashed rgba(255,255,255,0.75)
+			}
 		}
 	}
 }

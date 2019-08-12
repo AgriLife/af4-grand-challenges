@@ -121,8 +121,8 @@ class Shortcode {
 					<div class="faculty-search-header grid-container">
 						<form role="search" class="people-searchform grid-x grid-padding-x" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $post->post_name ); ?>" data-specialization="<?php echo esc_attr( $a['specialization'] ); ?>">
 							<div class="cell medium-3"><select name="department" id="department"><option value="">Department</option>%s</select></div><div class="cell medium-3"><input type="text" class="s" name="p" id="s" placeholder="Search for a term" /></div><div class="cell medium-2"><input type="text" class="s" name="facultyname" id="n" placeholder="Enter name" /></div>
-							<div class="cell medium-2"><button type="submit" class="button">Filter</button></div>
-							<div class="cell medium-2"><button type="button" class="button clear">Clear</button></div>
+							<div class="cell medium-2"><button type="submit" class="button maroon">Filter</button></div>
+							<div class="cell medium-2"><button type="button" class="button dark-gray clear">Clear</button></div>
 						</form>
 					</div>
 				<?php
