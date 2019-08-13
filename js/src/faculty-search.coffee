@@ -14,6 +14,7 @@ AgriLife.People = class People
 			data:
 				action: 'get_people'
 			success: (response) =>
+				response = JSON.parse response
 				prefix = 'agrilife-people-';
 				if @specialization then prefix += @specialization
 				else prefix += 'all'
@@ -77,7 +78,6 @@ AgriLife.People = class People
 			list[index] = person
 
 	init: ->
-		console.log 'init'
 		@parent = $ '.people-searchform'
 		@listParent = $ '#people-listing-ul'
 
@@ -114,7 +114,6 @@ AgriLife.People = class People
 	setLastUsedVals: (vals) ->
 		if vals is undefined
 			vals = @getFiltersAsIndexes()
-		console.log 'setLastUsedVals' + JSON.stringify(vals)
 		@lastSpec = vals.spec
 		@lastDept = vals.dept
 		@lastName = vals.facultyname
@@ -132,7 +131,6 @@ AgriLife.People = class People
 		nameregex = new RegExp '[\\?&]facultyname=([^&#]*)'
 		nameresults = nameregex.exec location.search
 		facultyname = if nameresults is null then '' else decodeURIComponent nameresults[1].replace /\+/g, ' '
-
 
 		@setLastUsedVals {
 			spec: @specializations.indexOf(spec),
@@ -211,13 +209,10 @@ AgriLife.People = class People
 		if terms is undefined
 			terms = @getFiltersAsIndexes()
 
-		console.log 'updateResults' + JSON.stringify(terms)
-
 		activeClasses = []
 		if -1 isnt terms.spec and undefined isnt terms.spec then activeClasses.push '.spec-' + terms.spec
 		if -1 isnt terms.dept and undefined isnt terms.dept then activeClasses.push '.dept-' + terms.dept
 
-		console.log activeClasses
 		if activeClasses.length is 0 and (terms.facultyname is undefined or terms.facultyname is '')
 			$faculty.filter(':hidden').fadeIn()
 			$faculty.removeClass('item-odd').each (i) ->
@@ -244,7 +239,6 @@ AgriLife.People = class People
 				return fulltext.indexOf(text) >= 0
 
 	tryPushState: (e, vals, callback) ->
-		console.log 'tryPushState'
 		if history.pushState
 			# Update results without reloading
 			@updateResults()

@@ -164,6 +164,38 @@
 	.people-email {
 		word-break: break-word;
 	}
+
+	@include breakpoint(976px down) {
+		#searchform {
+			flex-wrap: wrap;
+
+			.medium-4,
+			.medium-3 {
+				width: 50%;
+			}
+
+			.medium-1 {
+				width: 25%;
+			}
+
+			> .cell:first-child,
+			> .cell:first-child + .cell {
+				margin-bottom: $grid-padding-gutters / 2;
+			}
+		}
+
+		.column-headings,
+		.person-info {
+			.cell {
+				padding: 0 $grid-padding-gutters / 4;
+			}
+		}
+
+		ul button {
+			bottom: .25rem;
+			right: .25rem;
+		}
+	}
 }
 
 // jQuery UI styles
