@@ -1,4 +1,5 @@
 module.exports = (grunt) ->
+	sass = require 'node-sass'
 	@initConfig
 		pkg : @file.readJSON('package.json')
 		watch:
@@ -15,16 +16,19 @@ module.exports = (grunt) ->
 		sass:
 			pkg:
 				options:
-					loadPath: 'node_modules/foundation-sites/scss'
+					implementation: sass
 					noSourceMap: true
-					style: 'compressed'
+					outputStyle: 'compressed'
 					precision: 2
+					includePaths: ['node_modules/foundation-sites/scss']
 				files:
 					'css/faculty-search.css': 'css/src/faculty-search.scss'
 			dev:
 				options:
-					loadPath: 'node_modules/foundation-sites/scss'
-					style: 'expanded'
+					implementation: sass
+					sourceMap: true
+					includePaths: ['node_modules/foundation-sites/scss']
+					outputStyle: 'nested'
 					precision: 2
 				files:
 					'css/faculty-search.css': 'css/src/faculty-search.scss'
@@ -34,8 +38,8 @@ module.exports = (grunt) ->
 			target: ['css/**/*.s+(a|c)ss']
 	@loadNpmTasks 'grunt-contrib-coffee'
 	@loadNpmTasks 'grunt-contrib-watch'
-	@loadNpmTasks 'grunt-contrib-sass'
 	@loadNpmTasks 'grunt-sass-lint'
+	@loadNpmTasks 'grunt-sass'
 
 	@registerTask 'default', ['coffee', 'sass:pkg']
 	@registerTask 'develop', ['coffee', 'sass:dev']

@@ -32,9 +32,9 @@ rules:
         - 'ms-filter'
         - '*text-indent'
         - '*zoom'
-  space-after-colon: true
-  space-after-comma: true
-  trailing-semicolon: true
+  space-after-colon: 1
+  space-after-comma: 1
+  trailing-semicolon: 1
   extends-before-mixins: 2
   no-warn: 1
   no-debug: 1

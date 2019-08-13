@@ -10,7 +10,7 @@
     "checkphp": "vendor/bin/phpcs --standard=WordPress --report=source ./*.php ./src && vendor/bin/phpcs --standard=WordPress ./*.php ./src"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "repository": {
     "type": "git",
@@ -31,9 +31,9 @@
     "foundation-sites": "^6.5.3",
     "grunt": "^1.0.4",
     "grunt-contrib-coffee": "^2.1.0",
-    "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.0.2",
     "grunt-sass-lint": "^0.2.4",
-    "sass": "^1.22.9"
+    "node-sass": "^4.12.0"
   }
 }
