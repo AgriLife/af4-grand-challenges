@@ -22,7 +22,7 @@ Shortcodes:
 
 1. Copy this repo to the desired location.
 2. In your terminal, navigate to the plugin location 'cd /path/to/the/plugin'
-3. Run "npm start" to configure your local copy of the repo, install dependencies, and build files
+3. Run "npm start" to configure your local copy of the repo, install dependencies, and build files.
 
 ## Development Notes
 
