@@ -15,6 +15,10 @@ AgriLife.People = class People
 				action: 'get_people'
 			success: (response) =>
 				response = JSON.parse response
+
+				if response is undefined or ( response.people and response.people.length is 0 )
+					return
+
 				prefix = 'agrilife-people-';
 				if @specialization then prefix += @specialization
 				else prefix += 'all'
