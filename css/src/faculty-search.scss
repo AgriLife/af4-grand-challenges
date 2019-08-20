@@ -1,78 +1,11 @@
 @import "foundation";
 @import "settings";
 
-.people-listing-item:nth-child(2n) {
-	background-color: transparent;
-}
-
 .people-search-form {
-	.category .button {
-		padding: 10px 25px;
-		margin: 0 $paragraph-margin-bottom / 2 $paragraph-margin-bottom / 2 $paragraph-margin-bottom / 2;
-
-		@include breakpoint(medium) {
-			margin: 0 $paragraph-margin-bottom $paragraph-margin-bottom $paragraph-margin-bottom;
-		}
-	}
-
 	button {
 		height: ($input-font-size * unitless-calc($input-line-height))
 			+ (get-side($input-padding, "top") + get-side($input-padding, "bottom")) - rem-calc(1);
 		margin: 0 0 $form-spacing $form-spacing;
-
-		@include breakpoint(small only) {
-			padding: 0;
-			width: ($input-font-size * unitless-calc($input-line-height))
-				+ (get-side($input-padding, "top") + get-side($input-padding, "bottom")) - rem-calc(1);
-			background: transparent
-			url("../../../../../wp-content/themes/agriflex4/images/search-agrilife.png")
-			no-repeat {
-				size: contain;
-			}
-			overflow: hidden;
-			text-indent: 100%;
-
-			&:hover {
-				background-color: transparent;
-			}
-		}
-	}
-
-	#searchform {
-		@include breakpoint(medium) {
-			flex-wrap: nowrap;
-			margin-left: -.5rem;
-			margin-right: -.5rem;
-
-			> .cell {
-				padding: 0 .5rem;
-			}
-		}
-
-		button {
-			margin-left: 0;
-			width: 100%;
-			border-radius: 19px;
-			color: $whiter;
-			padding: {
-				left: 2px;
-				right: 2px;
-			}
-			font-size: 14px;
-
-			&.maroon {
-				background-color: $maroon;
-			}
-
-			&.dark-gray {
-				background-color: $gray-dark;
-			}
-
-			&:active,
-			&:hover {
-				border: 1px dashed rgba(255, 255, 255, 0.75);
-			}
-		}
 	}
 }
 
@@ -102,6 +35,10 @@
 		padding: $paragraph-margin-bottom / 2;
 	}
 
+	.people-container {
+		padding: $paragraph-margin-bottom / 2 $paragraph-margin-bottom / 2 0;
+	}
+
 	ul .cell:first-child,
 	.column-headings .cell:first-child {
 		width: 82px;
@@ -122,30 +59,72 @@
 	> ul {
 		> li {
 			position: relative;
+			background-color: $gray-lighter;
+			padding-bottom: $paragraph-margin-bottom / 2;
 
 			&.item-odd {
-				background-color: $gray-lighter;
+				background-color: transparent;
+			}
+
+			@include breakpoint(medium) {
+				background-color: transparent;
+
+				&.item-odd {
+					background-color: $gray-lighter;
+				}
 			}
 		}
 
 		button {
-			position: absolute;
-			bottom: $grid-padding-gutters / 2;
-			right: $grid-padding-gutters / 2;
 			line-height: normal;
 			cursor: pointer;
 			font-family: Consolas, monospace;
+			margin-left: $paragraph-margin-bottom / 2;
 		}
 
 		ul {
 			margin-left: 0;
 			list-style-position: inside;
-			max-height: 102px;
-			overflow: hidden;
+			display: none;
 		}
 
 		> li.expanded ul {
-			max-height: none;
+			display: block;
+		}
+
+		@include breakpoint(small only) {
+			.people-name {
+				font-size: 1.8rem;
+				line-height: 2rem;
+				color: $nav-blue;
+			}
+
+			> li {
+				line-height: 1.5;
+			}
+
+			button::before {
+				content: "Research Interests ";
+				font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+			}
+		}
+
+		@include breakpoint(medium) {
+			button {
+				position: absolute;
+				bottom: $grid-padding-gutters / 2;
+				right: $grid-padding-gutters / 2;
+			}
+
+			ul {
+				display: block;
+				overflow: hidden;
+				max-height: 102px;
+			}
+
+			> li.expanded ul {
+				max-height: none;
+			}
 		}
 	}
 
@@ -165,35 +144,116 @@
 		word-break: break-word;
 	}
 
-	@include breakpoint(976px down) {
-		#searchform {
-			flex-wrap: wrap;
+	#searchform {
+		flex-wrap: wrap;
 
-			.medium-4,
-			.medium-3 {
-				width: 50%;
-			}
+		.cell {
+			margin-top: $grid-padding-gutters / 2;
 
-			.medium-1 {
-				width: 25%;
-			}
-
-			> .cell:first-child,
-			> .cell:first-child + .cell {
-				margin-bottom: $grid-padding-gutters / 2;
+			&:first-child {
+				margin-top: 0;
 			}
 		}
 
-		.column-headings,
-		.person-info {
+		button {
+			margin-left: 0;
+			width: 100%;
+			border-radius: 19px;
+			color: $whiter;
+			padding: {
+				left: 2px;
+				right: 2px;
+			}
+			font-size: 14px;
+
+			&.maroon {
+				background-color: $maroon;
+			}
+
+			&.dark-gray {
+				background-color: $gray-dark;
+			}
+
+			&:active,
+			&:hover {
+				border: 1px dashed rgba(255, 255, 255, 0.75);
+			}
+		}
+
+		@include breakpoint(medium) {
+			margin-left: -.5rem;
+			margin-right: -.5rem;
+
 			.cell {
-				padding: 0 $grid-padding-gutters / 4;
+				margin-top: 0;
+			}
+
+			> .cell {
+				padding: 0 .5rem;
 			}
 		}
+	}
 
-		ul button {
-			bottom: .25rem;
-			right: .25rem;
+	@include breakpoint(small only) {
+		.cell {
+			width: 100%;
+
+			p {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	@include breakpoint(976px down) {
+		@include breakpoint(590px up) {
+			#searchform {
+
+				.cell {
+					margin-top: 0;
+				}
+
+				.medium-4,
+				.medium-3 {
+					width: 50%;
+				}
+
+				.medium-1 {
+					width: 25%;
+				}
+
+				> .cell:first-child,
+				> .cell:first-child + .cell {
+					margin-bottom: $grid-padding-gutters / 2;
+				}
+			}
+
+			.column-headings,
+			.person-info {
+				.cell {
+					padding: 0 $grid-padding-gutters / 4;
+				}
+			}
+
+			ul button {
+				bottom: .25rem;
+				right: .25rem;
+			}
+		}
+	}
+
+	@include breakpoint(976px up) {
+		#searchform {
+			flex-wrap: nowrap;
+		}
+	}
+
+	@include breakpoint(medium) {
+		.people-container {
+			padding-bottom: $paragraph-margin-bottom / 2;
+		}
+
+		.afs-list > ul > li {
+			padding-bottom: 0;
 		}
 	}
 }
