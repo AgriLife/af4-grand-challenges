@@ -59,20 +59,6 @@ class Shortcode {
 		ob_start(); ?>
 		<div class="afs-list">
 			<div class="people-search-form center">
-				<label class="p">
-					<h4>Search faculty by specialty</h4>
-				</label>
-				<div class="grid-x">
-					<div class="cell medium-6 small-12 category" data-category="Food"><a href="#Food" class="button expanded button-radius secondary">Feeding Our World</a></div>
-					<div class="cell medium-6 small-12 category" data-category="Environment"><a href="#Environment" class="button expanded button-radius secondary">Protecting Our Environment</a></div>
-				</div>
-				<div class="grid-x">
-					<div class="cell medium-6 small-12 category" data-category="Health"><a href="#Health" class="button expanded button-radius secondary">Improving Our Health</a></div>
-					<div class="cell medium-6 small-12 category" data-category="Youth"><a href="#Youth" class="button expanded button-radius secondary">Enriching Our Youth</a></div>
-				</div>
-				<div class="grid-x">
-					<div class="cell medium-6 small-12 category" data-category="Economy"><a href="#Economy" class="button expanded button-radius secondary">Growing Our Economy</a></div>
-				</div>
 				<?php
 
 				global $post;
@@ -120,7 +106,7 @@ class Shortcode {
 				?>
 					<div class="faculty-search-header grid-container">
 						<form role="search" class="people-searchform grid-x grid-padding-x" method="get" id="searchform" action="<?php echo esc_url( home_url() ); ?>/<?php echo esc_url( $post->post_name ); ?>" data-specialization="<?php echo esc_attr( $a['specialization'] ); ?>">
-							<div class="cell medium-4"><select name="department" id="department"><option value="">Department</option>%s</select></div><div class="cell medium-3"><input type="text" class="s" name="p" id="s" placeholder="Search for a term" /></div><div class="cell medium-3"><input type="text" class="s" name="facultyname" id="n" placeholder="Enter name" /></div>
+							<div class="cell medium-4"><input type="text" class="s" name="p" id="s" placeholder="Search for a term" /></div><div class="cell medium-3"><select name="department" id="department"><option value="">Department</option>%s</select></div><div class="cell medium-3"><input type="text" class="s" name="facultyname" id="n" placeholder="Enter name" /></div>
 							<div class="cell medium-1"><button type="submit" class="button maroon">Filter</button></div>
 							<div class="cell medium-1"><button type="button" class="button dark-gray clear">Clear</button></div>
 						</form>
@@ -152,14 +138,14 @@ class Shortcode {
 
 				?>
 			</div>
-			<div class="column-headings grid-container"><div class="grid-x grid-padding-x"><div class="cell"></div><div class="cell medium-21"><strong>Name/Title</strong></div><div class="cell medium-21"><strong>Phone/Email</strong></div><div class="cell medium-21"><strong>Department</strong></div><div class="cell medium-auto"><strong>Research Interests</strong></div></div></div>
+			<div class="column-headings grid-container hide-for-small-only"><div class="grid-x grid-padding-x"><div class="cell"></div><div class="cell medium-21"><strong>Name/Title</strong></div><div class="cell medium-21"><strong>Phone/Email</strong></div><div class="cell medium-21"><strong>Department</strong></div><div class="cell medium-auto"><strong>Research Interests</strong></div></div></div>
 			<ul id="people-listing-ul" class="reset"></ul>
 		</div>
 		<script type="text/template" id="people-template">
 			<li class="people-listing-item dept-{{= person.d}}{{ if ( ! _.isEmpty(person.s)) { }}{{ _.each(person.s, function(s){ }} spec-{{= s}}{{ }); }}{{ } }}">
 				<div class="role people-container grid-container">
 					<div class="person-info grid-x grid-padding-x">
-						<div class="person-image cell shrink">
+						<div class="person-image cell shrink hide-for-small-only">
 							{{ if ( ! _.isUndefined(person.pc)) { }}
 								{{ if ( ! _.isEmpty(person.pf)) { }}<a href="{{= person.pf }}">{{ } }}<img src="{{= person.pc }}" alt="{{= person.f }} {{= person.l }}" />{{ if ( ! _.isEmpty(person.pf)) { }}</a>{{ } }}
 							{{ } else { }}
