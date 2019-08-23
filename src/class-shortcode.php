@@ -158,7 +158,7 @@ class Shortcode {
 						<div class="person-interests cell medium-auto">{{ if ( ! _.isEmpty(person.fs)) { }}<ul>{{ _.each(person.fs, function(fs){ }}<li>{{= fs}}</li>{{ }); }}</ul>{{ } }}</div>
 					</div>
 				</div>
-				{{ if ( person.s.length > 4 ) { }}<button class="faculty-search-expand" type="button" onclick="if ( ! this.parentNode.classList.contains('expanded') ) { this.innerHTML = '[-]'; this.parentNode.classList.add('expanded'); } else { this.innerHTML = '[+]'; this.parentNode.classList.remove('expanded'); }">[+]</button>{{ } }}
+				{{ if ( ! _.isEmpty(person.s) && person.s.length > 4 ) { }}<button class="faculty-search-expand" type="button" onclick="if ( ! this.parentNode.classList.contains('expanded') ) { this.innerHTML = '[-]'; this.parentNode.classList.add('expanded'); } else { this.innerHTML = '[+]'; this.parentNode.classList.remove('expanded'); }">[+]</button>{{ } }}
 			</li>
 		</script>
 

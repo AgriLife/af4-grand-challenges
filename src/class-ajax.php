@@ -71,7 +71,7 @@ class Ajax {
 
 			$query = sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) );
 			preg_match( '/specialization=[^&]*/', esc_url( $query ), $specialization_param );
-			$faculty_specialization = ucwords( str_replace( 'specialization=', '', $specialization_param[0] ) );
+			$faculty_specialization = strtolower( str_replace( 'specialization=', '', $specialization_param[0] ) );
 
 		} else {
 
@@ -89,15 +89,18 @@ class Ajax {
 
 			// Get from API.
 			require_once plugin_dir_path( dirname( dirname( __FILE__ ) ) ) . 'agrilife-people-api/src/Data.php';
+			$adviser_ids    = array( 'graduate' => 34 );
 			$api            = new \AgriLife\PeopleAPI\Data();
 			$application_id = 3;
 			$hash           = base64_encode( md5( $application_id . AGRILIFE_API_KEY, true ) );
 			$limitedunits   = array( 286, 290, 291, 292, 294, 295, 296, 297, 298, 300, 302, 304, 314, 329, 353, 354, 355, 356, 357, 358, 359, 361, 362, 363, 364, 365, 366, 379, 396 );
+			$limitedroles   = array_key_exists( $faculty_specialization, $adviser_ids ) ? $adviser_ids[ $faculty_specialization ] : null;
 
 			$data = array(
 				'validation_key'     => $hash,
 				'site_id'            => $application_id,
 				'limited_units'      => implode( ',', $limitedunits ),
+				'limited_roles'      => $limitedroles,
 				'include_affiliated' => 1,
 			);
 
@@ -113,33 +116,9 @@ class Ajax {
 
 				foreach ( $payload as $p ) {
 
-					$title             = $p['positions'][0]['position_title'];
-					$skip              = false;
-					$prohibited_titles = array( 'Adjunct Professor', 'Professor Emeritus', 'Assistant Professor', 'Retired', 'Visiting Professor' );
+					$title = $p['positions'][0]['position_title'];
 
-					if (
-						'faculty' !== strtolower( $p['organizational_role'] ) ||
-						empty( $p['specializations'] ) ||
-						false === strpos( $title, 'Professor' ) ||
-						( ! empty( $faculty_specialization ) && ! in_array( $faculty_specialization, $p['specializations'], true ) )
-					) {
-
-						$skip = true;
-
-					} else {
-
-						foreach ( $prohibited_titles as $value ) {
-
-							if ( false !== strpos( $title, $value ) ) {
-
-								$skip = true;
-								break;
-
-							}
-						}
-					}
-
-					if ( $skip ) {
+					if ( false === strpos( $title, 'Professor' ) ) {
 
 						continue;
 
