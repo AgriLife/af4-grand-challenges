@@ -29,7 +29,7 @@
   "homepage": "https://github.com/AgriLife/agrilife-faculty-search#readme",
   "dependencies": {
     "foundation-sites": "^6.5.3",
-    "grunt": "^1.0.4",
+    "grunt": "^1.6.1",
     "grunt-contrib-coffee": "^2.1.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-sass": "^3.0.2",
